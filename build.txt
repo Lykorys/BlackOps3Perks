@@ -1,0 +1,3 @@
+displayName = BoneTest
+author = Lycoris
+version = 0.1

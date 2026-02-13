@@ -1,0 +1,59 @@
+Items: {
+	TestGun: {
+		DisplayName: Test Gun
+		Tooltip: ""
+	}
+
+	TestGun2: {
+		DisplayName: Test Gun2
+		Tooltip: ""
+	}
+
+	TestBossSummonItem: {
+		DisplayName: Test Boss Summon Item
+		Tooltip: ""
+	}
+
+	DayTimeChanger: {
+		DisplayName: Day Time Changer
+		Tooltip: ""
+	}
+
+	MithrixHammer: {
+		DisplayName: Mithrix Hammer
+		Tooltip: ""
+	}
+}
+
+NPCs: {
+	TestVillager: {
+		DisplayName: Test Villager
+		DeathMessage: Mods.BoneTest.NPCs.TestVillager.DeathMessage
+		Upgraded: Mods.BoneTest.NPCs.TestVillager.Upgraded
+
+		TownNPCMood: {
+			NoHome: I hate not having a home.
+			FarFromHome: I am too far from home.
+			Content: I am content.
+			LoveSpace: I love having so much space.
+			DislikeCrowded: I dislike how crowded I am.
+			HateCrowded: I hate how crowded I am.
+			LikeBiome: I like {BiomeName}.
+			DislikeBiome: I dislike {BiomeName}.
+			LoveNPC: I love {NPCName}.
+			LikeNPC: I like {NPCName}.
+			DislikeNPC: I dislike {NPCName}.
+			HateNPC: I hate {NPCName}.
+			LikeNPC_Princess: I like {NPCName}.
+			Princess_LovesNPC: I like {NPCName}.
+		}
+	}
+
+	TestBoss.DisplayName: Test Boss
+}
+
+Projectiles: {
+	TestGunProjectile.DisplayName: Test Gun Projectile
+	MithrixHammerProjAltUse.DisplayName: Mithrix Hammer Proj Alt Use
+	MithrixHammerProj.DisplayName: Mithrix Hammer Proj
+}
