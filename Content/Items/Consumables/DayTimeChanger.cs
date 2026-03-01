@@ -8,6 +8,7 @@ namespace BoneTest.Content.Items.Consumables
 {
 	public class DayTimeChanger : ModItem
 	{
+		private bool midDayMode = false;
 
 		public override void SetDefaults() {
 			Item.width = 20;
@@ -21,32 +22,51 @@ namespace BoneTest.Content.Items.Consumables
 			Item.consumable = false;
 		}
 
-
+		public override bool AltFunctionUse(Player player) => true;
         
 		public override bool? UseItem(Player player) {
-			if (player.whoAmI == Main.myPlayer) {
-				// If the player using the item is the client
-				// (explicitly excluded serverside here)
-				SoundEngine.PlaySound(SoundID.CoinPickup, player.position);
-                if (Main.dayTime)
-                {
-                    Main.NewText("Il fait nuit", Color.Yellow);
-                    Main.dayTime= false;
-                    Main.time=0;//on passe a la nuit
-                }
-                else
-                {
-                    Main.NewText("Il fait jour", Color.AntiqueWhite);
-                    Main.dayTime= true;
-                    Main.time=Main.dayLength/2;
-                }
-                // Sync of world data on the server in MP
-                if (Main.netMode == NetmodeID.Server) {
-                    NetMessage.SendData(MessageID.WorldData);
-                }
+			if(player.altFunctionUse == 2)
+			{
+				midDayMode= !midDayMode;
+				SoundEngine.PlaySound(SoundID.Roar,player.position);
 			}
-            Main.NewText(Main.dayTime, Color.Gray);
-            Main.NewText(Main.time, Color.Red);
+			
+			else
+			{
+				if (player.whoAmI == Main.myPlayer) {
+					if (midDayMode)
+					{
+						if (Main.dayTime)
+						{
+							Main.dayTime= false;
+							Main.time=Main.nightLength/2;//on passe a la nuit
+						}
+						else
+						{
+							Main.dayTime= true;
+							Main.time=Main.dayLength/2;
+						}
+					}
+					else
+					{
+						if (Main.dayTime)
+						{
+							Main.dayTime= false;
+							Main.time=0;//on passe a la nuit
+						}
+						else
+						{
+							Main.dayTime= true;
+							Main.time=0;
+						}
+					}
+					SoundEngine.PlaySound(SoundID.CoinPickup, player.position);
+					// Sync of world data on the server in MP
+					if (Main.netMode == NetmodeID.Server) {
+						NetMessage.SendData(MessageID.WorldData);
+					}
+				}
+			}
 			return true;
 		}
 	}

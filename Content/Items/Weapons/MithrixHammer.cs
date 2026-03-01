@@ -1,9 +1,12 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics; // Add this for Texture2D and SpriteBatch
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
-using Microsoft.Build.Evaluation;
+using Terraria.GameContent; // Add this for TextureAssets
+using System; // Add this for Math.Sin
+using BoneTest.Content.Config;
 
 namespace BoneTest.Content.Items.Weapons
 {
@@ -20,6 +23,7 @@ namespace BoneTest.Content.Items.Weapons
             Item.DamageType = DamageClass.Melee;
             Item.width = 64;
             Item.height = 64;
+            Item.scale=1.5f;
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Swing;
@@ -27,7 +31,7 @@ namespace BoneTest.Content.Items.Weapons
             Item.value = Item.sellPrice(0, 5, 0, 0);
             Item.rare = ItemRarityID.Cyan;
             Item.UseSound = SoundID.Item1;
-            Item.shoot=ProjectileID.HallowBossLastingRainbow;
+            Item.shoot=ProjectileID.HallowBossRainbowStreak;
             Item.autoReuse = true;
             Item.shootSpeed = 12f;
         }
@@ -107,18 +111,25 @@ namespace BoneTest.Content.Items.Weapons
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         { 
-           for(int i = 0; i < 4; i++)
+            float projspeed = ModContent.GetInstance<BossConfig>().projspeed != 0 ? ModContent.GetInstance<BossConfig>().projspeed : 10f;
+            for(int i = 0; i < 4; i++)
             {
-                Projectile.NewProjectile(
+                Vector2 velo = new Vector2(-player.direction*projspeed,0);
+                float rotation = MathHelper.ToRadians((i - 1.5f) * projspeed);
+                Vector2 finalVelocity = velo.RotatedBy(rotation);
+                int proj =  Projectile.NewProjectile(
                     source,
                     player.Center,
-                    arcVelocity,
-                    ModContent.ProjectileType<RainbowArcProjectile>(), // Use your custom projectile
+                    finalVelocity,
+                    ProjectileID.HallowBossRainbowStreak, // Use your custom projectile
                     damage,
                     knockback,
                     player.whoAmI,
                     0
                 );
+                Main.projectile[proj].ai[1] = ModContent.GetInstance<BossConfig>().hue ;
+                Main.projectile[proj].hostile = false;
+                Main.projectile[proj].friendly = true;
             }
             return false;
         }
@@ -129,6 +140,20 @@ namespace BoneTest.Content.Items.Weapons
             // Use baseDamage * 3 so it scales correctly
             Projectile.NewProjectile(Item.GetSource_FromThis(), player.Center, velocity * 14f, ProjectileID.LunarFlare, baseDamage * 3, 10f, player.whoAmI);
             Terraria.Audio.SoundEngine.PlaySound(SoundID.Item14, player.position);
+        }
+        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
+            // Access the item's texture
+            Texture2D texture = TextureAssets.Item[Item.type].Value;
+
+            // Increase the 'scale' multiplier here. 
+            // 1.5f makes it 50% larger than its actual sprite size.
+            float customScale = scale * 1.5f;
+
+            // Draw the item with the new scale
+            spriteBatch.Draw(texture, position, frame, drawColor, 0f, origin, customScale, SpriteEffects.None, 0f);
+
+            // Return false so the game doesn't draw the normal-sized version on top
+            return false;
         }
     }
 }

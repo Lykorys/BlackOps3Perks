@@ -23,6 +23,51 @@ Items: {
 		DisplayName: Mithrix Hammer
 		Tooltip: ""
 	}
+
+	MithrixSummonItem: {
+		DisplayName: Mithrix Summon Item
+		Tooltip: ""
+	}
+
+	CrimsonAltarItem: {
+		Tooltip: ""
+		DisplayName: Crimson Altar Item
+	}
+
+	CorruptAltarItem: {
+		Tooltip: ""
+		DisplayName: Corrupt Altar Item
+	}
+
+	CamLockTest: {
+		DisplayName: Cam Lock Test
+		Tooltip: ""
+	}
+
+	MR6: {
+		DisplayName: MR6
+		Tooltip: ""
+	}
+
+	RK5: {
+		Tooltip: ""
+		DisplayName: RK5
+	}
+
+	DoomShotgun: {
+		DisplayName: Doom Shotgun
+		Tooltip: ""
+	}
+
+	SuperShotgun: {
+		DisplayName: Super Shotgun
+		Tooltip: ""
+	}
+
+	PackAPunch: {
+		DisplayName: Pack A Punch
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -50,6 +95,7 @@ NPCs: {
 	}
 
 	TestBoss.DisplayName: Test Boss
+	Mithrix.DisplayName: Mithrix
 }
 
 Projectiles: {
@@ -57,3 +103,56 @@ Projectiles: {
 	MithrixHammerProjAltUse.DisplayName: Mithrix Hammer Proj Alt Use
 	MithrixHammerProj.DisplayName: Mithrix Hammer Proj
 }
+
+Configs: {
+	BossConfig: {
+		DisplayName: Boss Config
+
+		Headers: {
+			BossAIAttackFP: Boss A I Attack F P Header
+			BossAIAttackSP: Boss A I Attack S P Header
+			BossAIStartPhase: Boss A I Start Phase Header
+			MithrixAISettings: Mithrix A I Settings Header
+			MithrixAIStartPhase: Mithrix A I Start Phase Header
+			projspeed: projspeed Header
+			hue: hue Header
+		}
+
+		ForcedAttackHandFP: {
+			Label: Forced Attack Hand F P
+			Tooltip: ""
+		}
+
+		ForcedAttackHandSP: {
+			Label: Forced Attack Hand S P
+			Tooltip: ""
+		}
+
+		forcedPhaseHand: {
+			Label: forced Phase Hand
+			Tooltip: ""
+		}
+
+		ForcedAttackMithrix: {
+			Label: Forced Attack Mithrix
+			Tooltip: ""
+		}
+
+		forcedPhaseMithrix: {
+			Label: forced Phase Mithrix
+			Tooltip: ""
+		}
+
+		projspeed: {
+			Label: projspeed
+			Tooltip: ""
+		}
+
+		hue: {
+			Label: hue
+			Tooltip: ""
+		}
+	}
+}
+
+Keybinds.Reload.DisplayName: Reload

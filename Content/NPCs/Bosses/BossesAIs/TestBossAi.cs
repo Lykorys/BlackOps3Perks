@@ -6,11 +6,13 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using BoneTest.Content.Config;
 
 namespace BoneTest.Content.NPCs.Bosses.BossesAIs
 {
     public class TestBossAI
     {
+        public static BossConfig config = ModContent.GetInstance<BossConfig>();
         private static bool switchedPhase = false;
         private static bool hasTPd= false;
         private static float phaseSwitchTreshold = 0.5f; 
@@ -36,6 +38,8 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
         private static int grabFinisherPeriod = grabAttackPeriod+60;
         /*-Second Stage*/
         private static float speedSecondStage = 20f;
+        /*PFC*/
+        private static float PFCDistanceFromPlayer = 400f;
         public static void VanillaTestBossAI(NPC npc,Mod mod){
             // Get a target
             if (npc.target < 0 || npc.target == Main.maxPlayers || Main.player[npc.target].dead || !Main.player[npc.target].active){
@@ -44,7 +48,7 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                 
             // Target variable
             Player player = Main.player[npc.target];
-			
+			bool canSwitch= config.forcedPhaseHand == 0;
 			if (player.dead) {
 				// If the targeted player is dead, flee
 				npc.velocity.Y -= 0.04f;
@@ -52,7 +56,15 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
 				npc.EncourageDespawn(10);
 				return;
 			}
-            if (!switchedPhase && npc.life < npc.lifeMax * phaseSwitchTreshold && npc.ai[1] == 0)
+            if (config.forcedPhaseHand == 1)
+            {
+                switchedPhase=false;
+            }
+            else if(config.forcedPhaseHand==2)
+            {
+                switchedPhase=true;                
+            }
+            if (!switchedPhase && npc.life < npc.lifeMax * phaseSwitchTreshold && npc.ai[1] == 0 && canSwitch)
             {
                 switchedPhase=true;
                 phaseDelayMultiplier=0.8f;
@@ -85,6 +97,11 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
             { 
                 boss.ai[3] = Main.rand.NextBool() ? 1 : -1;
             }
+
+            if (config.ForcedAttackHandFP != 0)
+            {
+                boss.ai[1]=config.ForcedAttackHandFP;
+            }
             switch (boss.ai[1])
             {
                 case 0://hover
@@ -112,7 +129,8 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                     int waitTime = 200;
                     if (boss.ai[0] >= waitTime)
                     {
-                        boss.ai[1] = Main.rand.Next(1,4);//attack that he does
+                        if(config.ForcedAttackHandFP != 0) boss.ai[1]=config.ForcedAttackHandFP;
+                        else  boss.ai[1] = Main.rand.Next(1,3);//attack that he does
                         boss.ai[0] = 0; // Reset timer
                     }
                     
@@ -124,13 +142,6 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                 case 2://slam
                     slamAttack(player,boss);
                     break; 
-                case 3:
-                    grabAttack(player,boss);
-                    break;
-                case 4:
-                    if(boss.ai[3]==0) boss.ai[3]=Main.rand.Next(1,4);
-                    pfcAttack(player,boss);
-                    break;
             }
         }
 
@@ -342,6 +353,8 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
             { 
                 boss.ai[3] = Main.rand.NextBool() ? 1 : -1;
             }
+            
+        
             boss.ai[0]++;
             switch (boss.ai[1])
             {
@@ -369,7 +382,8 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                     int waitTime = 200;
                     if (boss.ai[0] >= waitTime)
                     {
-                        boss.ai[1] = Main.rand.Next(1,5);//attack that he does
+                        if(config.ForcedAttackHandSP != 0) boss.ai[1]=config.ForcedAttackHandSP;
+                        else  boss.ai[1] = Main.rand.Next(1,5);//attack that he does
                         boss.ai[0] = 0; // Reset timer
                     }
                     
@@ -384,6 +398,7 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                     pistolAttack(player,boss);
                     break;
                 case 4:
+                    if(boss.ai[3]==0) boss.ai[3] = Main.rand.Next(1,4);
                     pfcAttack(player,boss);
                     break;
             }
@@ -442,10 +457,11 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
         {
             if (boss.ai[0] < 180)
             {
-                boss.ai[3]=1;
                 switch (boss.ai[3])
                 {
                     case 1://Pierre
+                        boss.velocity=Vector2.Zero;
+                        Main.NewText("Pierre");
                         int projectileDamage=40;
                         if (boss.ai[0] % 20 == 0)
                         {
@@ -462,7 +478,27 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                         Main.NewText("Feuille");
                         break;
                     case 3://Ciseaux
-                        Main.NewText("Ciseaux");
+                        Main.NewText("Ciso");
+                        List<float> firingCadence = new List<float>{80,95,110,125,140,155,170};
+                        float rotationSpeed = 0.05f; 
+                        double angle = boss.ai[0] * rotationSpeed;
+                        float radius = PFCDistanceFromPlayer; 
+                        Vector2 offset = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * radius;
+                        Vector2 targetPosition = player.Center + offset;
+                        boss.position = targetPosition;
+                        boss.rotation = (player.Center - boss.Center).ToRotation() - (float)Math.PI / 2;
+                        if (firingCadence.Contains(boss.ai[0]))
+                        {
+                            Vector2 shotDirection = player.Center - boss.Center;
+                            shotDirection.Normalize();
+                            shotDirection *= 10f; // Projectile speed
+                            int proj= Projectile.NewProjectile(boss.GetSource_FromAI(), boss.Center, shotDirection, ProjectileID.DeathLaser, 16, 1f);
+                            if (proj >= 0 && proj < Main.maxProjectiles)
+                            {
+                                Main.projectile[proj].hostile = true;
+                                Main.projectile[proj].friendly = false;
+                            }
+                        }
                         break;
                 }   
             }
@@ -471,7 +507,6 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                 boss.ai[0]=0;
                 boss.ai[3]=0;
             }
-            
         }
     }
 }
