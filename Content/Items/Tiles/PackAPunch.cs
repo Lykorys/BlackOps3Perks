@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Graphics;
 using log4net.DateFormatter;
 using BoneTest.Content.Utils.Functions;
 using System.Linq;
+using Mono.Cecil.Cil;
+using Steamworks;
 namespace BoneTest.Content.Items.Tiles
 {
     public class PackAPunchTile : ModTile
@@ -71,17 +73,27 @@ namespace BoneTest.Content.Items.Tiles
                 
                 // 2. Find the entity at this location
                 if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out TileEntity te) && te is PackAPunchEntity pEntity) {
-                    
-                    // 3. Check your timer (this is the logic link between entity and view)
-                    if (pEntity.timer > 120 && pEntity.timer < 180 && !pEntity.itemSlot.IsAir) {
+                    float progress = (float)pEntity.timer / PackAPunchProcesses.Duration;
+                    float  scale = 1f - progress;
+                    if (pEntity.timer < PackAPunchProcesses.Duration){
                         Texture2D texture = Terraria.GameContent.TextureAssets.Item[pEntity.itemSlot.type].Value;
-                        
-                        Vector2 tileCenter = new Vector2(i * 16 + 24, j * 16 + 16); 
+                        Vector2 tileCenter = new(i * 16 + 24, j * 16 + 16);
                         Vector2 drawPos = tileCenter - Main.screenPosition;
-                        
-                        // 5. Draw!
+                        spriteBatch.Draw(texture, drawPos, null, Color.White, 0f, texture.Size() / 2f, scale, SpriteEffects.None, 0f);
+                    }
+                    else if(pEntity.timer == PackAPunchProcesses.Duration){
+                        Texture2D texture = Terraria.GameContent.TextureAssets.Item[pEntity.itemSlot.type].Value;
+                        Vector2 tileCenter = new(i * 16 + 24, j * 16 + 16);
+                        Vector2 drawPos = tileCenter - Main.screenPosition;
                         spriteBatch.Draw(texture, drawPos, null, Color.White, 0f, texture.Size() / 2, 1f, SpriteEffects.None, 0f);
                     }
+                    else if(pEntity.timer > PackAPunchProcesses.Duration && pEntity.timer < PackAPunchProcesses.Timeout){
+                        Texture2D texture = Terraria.GameContent.TextureAssets.Item[pEntity.itemSlot.type].Value;
+                        Vector2 tileCenter = new(i * 16 + 24, j * 16 + 16);
+                        Vector2 drawPos = tileCenter - Main.screenPosition;
+                        spriteBatch.Draw(texture, drawPos, null, Color.White, 0f, texture.Size() / 2f, scale, SpriteEffects.None, 0f);
+                    }
+                    
                 }
             }
 }
@@ -91,15 +103,14 @@ namespace BoneTest.Content.Items.Tiles
     {
         public Item itemSlot = new Item();
         public int timer = 0;
-
+        public PackAPunchProcesses.PunchProcess recipe;
         public override bool IsTileValidForEntity(int x, int y) => Main.tile[x, y].HasTile && Main.tile[x, y].TileType == ModContent.TileType<PackAPunchTile>();
 
         public override void Update() {
             if (Main.netMode == NetmodeID.MultiplayerClient) return;
-            var recipe = PackAPunchProcesses.PunchUpgrades.FirstOrDefault(x => x.Input == itemSlot.type);
-            Main.NewText(recipe);
+            if(timer==0) recipe=PackAPunchProcesses.PunchUpgrades.FirstOrDefault(x => x.Input == itemSlot.type);
             if (recipe!=null) {//contains normal
-                Main.NewText(timer);
+                
                 timer++;
                 if (timer % 10 == 0) {
                     Dust.NewDust(Position.ToWorldCoordinates(), 32, 32, DustID.PurpleTorch);
@@ -107,6 +118,7 @@ namespace BoneTest.Content.Items.Tiles
                 if (timer == 120) {
                     Main.NewText("Cooked");
                     itemSlot.SetDefaults(recipe.Output);
+                    recipe=null;
                     // Sync and play finished sound
                     NetMessage.SendData(MessageID.TileEntitySharing, -1, -1, null, ID, Position.X, Position.Y);
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item37, Position.ToWorldCoordinates());

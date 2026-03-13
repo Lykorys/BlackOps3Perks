@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BoneTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b18c7809dd1f24960c36028df31b454574241f3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3559a451f8df8778c28ee2af1c04251f59e123b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("BoneTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BoneTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

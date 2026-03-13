@@ -68,6 +68,16 @@ Items: {
 		DisplayName: Pack A Punch
 		Tooltip: ""
 	}
+
+	PeaShooter: {
+		Tooltip: ""
+		DisplayName: Pea Shooter
+	}
+
+	JuggernogItem: {
+		DisplayName: Juggernog Item
+		Tooltip: ""
+	}
 }
 
 NPCs: {
@@ -102,6 +112,7 @@ Projectiles: {
 	TestGunProjectile.DisplayName: Test Gun Projectile
 	MithrixHammerProjAltUse.DisplayName: Mithrix Hammer Proj Alt Use
 	MithrixHammerProj.DisplayName: Mithrix Hammer Proj
+	PeaShooterProjectile.DisplayName: Pea Shooter Projectile
 }
 
 Configs: {

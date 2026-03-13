@@ -383,7 +383,7 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                     if (boss.ai[0] >= waitTime)
                     {
                         if(config.ForcedAttackHandSP != 0) boss.ai[1]=config.ForcedAttackHandSP;
-                        else  boss.ai[1] = Main.rand.Next(1,5);//attack that he does
+                        else  boss.ai[1] = Main.rand.Next(1,7);//attack that he does
                         boss.ai[0] = 0; // Reset timer
                     }
                     
@@ -398,6 +398,8 @@ namespace BoneTest.Content.NPCs.Bosses.BossesAIs
                     pistolAttack(player,boss);
                     break;
                 case 4:
+                case 5:
+                case 6: 
                     if(boss.ai[3]==0) boss.ai[3] = Main.rand.Next(1,4);
                     pfcAttack(player,boss);
                     break;

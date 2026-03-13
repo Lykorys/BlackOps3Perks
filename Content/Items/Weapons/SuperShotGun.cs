@@ -52,6 +52,8 @@ namespace BoneTest.Content.Items.Weapons
                 gun.maxAmmo = 2;
                 gun.reloadTime = (int)(60 *  1.77);
                 gun.reloadSound = SoundID.GuitarAm;
+                gun.shootSound= shootSound;
+                gun.whenToPlaySound= Item.useAnimation/Item.useTime;
             }
         }
 
@@ -67,11 +69,6 @@ namespace BoneTest.Content.Items.Weapons
         }
         public override void HoldItem(Player player)
         {
-            if (KeybindSystem.Reload.JustPressed) {
-                if (!Gun.isReloading && Gun.ammo < Gun.maxAmmo) {
-                    Gun.reload(player); 
-                }
-            }
             if (isGrappling)
             {
                 hookTTL--;

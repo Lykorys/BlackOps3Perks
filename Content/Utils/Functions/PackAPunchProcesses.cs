@@ -7,11 +7,12 @@ namespace BoneTest.Content.Utils.Functions
 {
     public class PackAPunchProcesses : GlobalItem
     {
+        public static readonly int Duration = 240;
+        public static readonly int Timeout = 480;
         public class PunchProcess {
             public int Input;
             public int Output;
-            public int Duration = 240;
-            public int Timeout = 480;
+            
         }
 
         // 1. Declare the list as static, but don't initialize it yet

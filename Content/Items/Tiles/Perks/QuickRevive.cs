@@ -1,0 +1,1 @@
+//keep perks after death except this one
