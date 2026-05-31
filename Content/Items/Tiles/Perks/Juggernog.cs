@@ -11,14 +11,30 @@ namespace BoneTest.Content.Items.Tiles.Perks
 {
     public class JuggernogTile : ModTile
     {
-        public override string Texture => "Terraria/Images/Tiles_26"; 
         public override void SetStaticDefaults() {
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = false;
-            TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
-            TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
+
+            // 1. Dimensions for a 2x4 object
+            TileObjectData.newTile.Width = 2;   
+            TileObjectData.newTile.Height = 4;  
+
+            // 2. Set pixel size to standard 16x16 blocks
+            TileObjectData.newTile.CoordinateWidth = 16; 
+            
+            // 3. EVERY standard Terraria sprite needs 2 pixels of padding between frames
+            TileObjectData.newTile.CoordinatePadding = 2; 
+
+            // 4. Set the height for all 4 vertical frames. The bottom-most frame usually
+            // includes the 2px padding, so make it 18 to match the sprite layout.
+            TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 18 };
+
+            // 5. Bottom-left block of the 2x4 is the origin (0, 3)
+            TileObjectData.newTile.Origin = new Terraria.DataStructures.Point16(0, 3); 
+
             TileObjectData.addTile(Type);
+
             AddMapEntry(new Color(150, 50, 255)); 
             AdjTiles = new int[] { TileID.Hellforge };
         }
@@ -48,7 +64,8 @@ namespace BoneTest.Content.Items.Tiles.Perks
 
         public override int Hook_AfterPlacement(int i, int j, int type, int style, int direction, int alternate) {
             if (Main.netMode == NetmodeID.MultiplayerClient) {
-                NetMessage.SendTileSquare(Main.myPlayer, i, j, 3, 2);
+                // Change the size parameter to 4 so it covers the whole 2x4 structure
+                NetMessage.SendTileSquare(Main.myPlayer, i, j, 4);
                 NetMessage.SendData(MessageID.TileEntityPlacement, -1, -1, null, i, j, Type);
                 return -1;
             }

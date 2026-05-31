@@ -17,7 +17,7 @@ namespace BoneTest.Content.Items.Weapons
         private int hookNumber = -1;
         private int hookTTL=20;
         public override string Texture => "Terraria/Images/Item_" + ItemID.Boomstick;
-		SoundStyle shootSound = new SoundStyle("BoneTest/Content/Sound/Weapons/mr6ShootSound") {
+		SoundStyle shootSound = new SoundStyle("BoneTest/Content/Sound/Weapons/MR6shoot") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 3 // Prevents the sound from overlapping too many times

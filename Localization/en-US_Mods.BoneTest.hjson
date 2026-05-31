@@ -108,6 +108,45 @@ Items: {
 		DisplayName: Stamina Up
 		Tooltip: ""
 	}
+
+	KN-44.DisplayName: KN-44
+
+	LCAR9: {
+		DisplayName: L-CAR 9
+		Tooltip: ""
+	}
+
+	WunderWaffe.DisplayName: Wunderwaffe DG-2
+
+	Bloundhound: {
+		DisplayName: Bloundhound
+		Tooltip: ""
+	}
+
+	KN44: {
+		DisplayName: K N44
+		Tooltip: ""
+	}
+
+	Wunderwaffe: {
+		DisplayName: Wunderwaffe
+		Tooltip: ""
+	}
+
+	Raygun: {
+		DisplayName: Raygun
+		Tooltip: ""
+	}
+
+	Thundergun: {
+		DisplayName: Thundergun
+		Tooltip: ""
+	}
+
+	RaygunMK2: {
+		Tooltip: ""
+		DisplayName: Raygun M K2
+	}
 }
 
 NPCs: {
@@ -144,6 +183,10 @@ Projectiles: {
 	MithrixHammerProj.DisplayName: Mithrix Hammer Proj
 	PeaShooterProjectile.DisplayName: Pea Shooter Projectile
 	CherryLightning.DisplayName: Cherry Lightning
+	WunderwaffeProjectile.DisplayName: Wunderwaffe Projectile
+	RaygunProjectile.DisplayName: Raygun Projectile
+	ThundergunProjectile.DisplayName: Thundergun Projectile
+	RaygunMK2Projectile.DisplayName: Raygun M K2 Projectile
 }
 
 Configs: {

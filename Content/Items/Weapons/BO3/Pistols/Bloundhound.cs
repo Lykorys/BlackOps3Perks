@@ -26,8 +26,8 @@ namespace BoneTest.Content.Items.Weapons.BO3.Pistols
         private ReloadableGun Gun => Item.GetGlobalItem<ReloadableGun>();
         public override void SetDefaults(){
 			Item.rare = ItemRarityID.Green; // The color that the item's name will be in-game.
-			Item.useTime = 1; // The item's use time in ticks (60 ticks == 1 second.)
-			Item.useAnimation = 1; // The length of the item's use animation in ticks (60 ticks == 1 second.)
+			Item.useTime = 10; // The item's use time in ticks (60 ticks == 1 second.)
+			Item.useAnimation = 10; // The length of the item's use animation in ticks (60 ticks == 1 second.)
 			Item.useStyle = ItemUseStyleID.Shoot; // How you use the item (swinging, holding out, etc.)
 			Item.DamageType = DamageClass.Ranged; // Sets the damage type to ranged.
 			Item.damage = 20; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
@@ -44,9 +44,6 @@ namespace BoneTest.Content.Items.Weapons.BO3.Pistols
                 gun.shootSound= shootSound;
                 gun.whenToPlaySound= Item.useAnimation/Item.useTime;
             }
-        }
-        public override void SetStaticDefaults() {
-            Terraria.Localization.Language.GetOrRegister("Mods.BoneTest.Items.MR6.DisplayName", () => "MR6");
         }
 
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 

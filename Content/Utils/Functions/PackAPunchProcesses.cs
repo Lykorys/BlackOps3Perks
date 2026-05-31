@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria.ModLoader;
 using BoneTest.Content.Items.Weapons;
+using BoneTest.Content.Items.Weapons.BO3.Pistols;
 
 namespace BoneTest.Content.Utils.Functions
 {
