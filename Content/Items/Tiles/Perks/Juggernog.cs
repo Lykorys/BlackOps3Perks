@@ -18,8 +18,8 @@ namespace BoneTest.Content.Items.Tiles.Perks
 
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
 			TileObjectData.newTile.Height = 4;
-			TileObjectData.newTile.CoordinateHeights = [16, 16, 16, 18];
-
+			TileObjectData.newTile.CoordinateHeights = [16, 16, 16,16];
+            TileObjectData.newTile.CoordinatePadding = 0;
             TileObjectData.addTile(Type);
 
             AddMapEntry(new Color(150, 50, 255)); 
