@@ -62,5 +62,11 @@ namespace BoneTest.Content.NPCs.Bosses
             if (hurtInfo.Damage > 0)
             target.AddBuff(BuffID.Darkness, 150, true);
         }
+        public override void OnKill()
+        {
+            Main.rainTime = 0; 
+            Main.raining = false;
+            Main.maxRaining = 0f;
+        }
     }
 }
