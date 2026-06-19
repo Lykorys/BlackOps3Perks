@@ -30,7 +30,7 @@ namespace BoneTest.Content.Players
         public void PerkAHolic()
         {
             var perkTypes = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.IsSubclassOf(typeof(Perk)) && !t.IsAbstract);
+                .Where(type => type.IsSubclassOf(typeof(Perk)) && !type.IsAbstract);
 
             foreach (Type type in perkTypes)
             {
