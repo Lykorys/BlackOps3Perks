@@ -4,20 +4,20 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using BoneTest.Content.Utils.Functions;
-using BoneTest.Content.Config;
+using BlackOps3.Content.Utils.Functions;
+using BlackOps3.Content.Config;
 using Steamworks;
 
-namespace BoneTest.Content.Items.Weapons.BO3.Pistols
+namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
 {
     public class Bloundhound : ModItem{
         public override string Texture => "Terraria/Images/Item_"+ItemID.Revolver ;
-        SoundStyle shootSound = new SoundStyle("BoneTest/Content/Sound/Weapons/MR6shoot") {
+        SoundStyle shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 3
         };
-        SoundStyle reloadSound = new SoundStyle("BoneTest/Content/Sound/Weapons/MR6reload") {
+        SoundStyle reloadSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6reload") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 3

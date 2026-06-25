@@ -4,7 +4,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace BoneTest.Content.Items.Consumables
+namespace BlackOps3.Content.Items.Consumables
 {
 	public class DayTimeChanger : ModItem
 	{

@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-namespace BoneTest.Content.Utils.Effects
+namespace BlackOps3.Content.Utils.Effects
 {
     public class ScreenShake : ModSystem
     {

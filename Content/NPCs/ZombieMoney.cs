@@ -1,9 +1,9 @@
-using BoneTest.Content.Players;
+using BlackOps3.Content.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace BoneTest.Content.NPCs
+namespace BlackOps3.Content.NPCs
 {
     public class ZombieMoney : GlobalNPC
     {

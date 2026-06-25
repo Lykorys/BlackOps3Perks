@@ -3,10 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using BoneTest.Content.Players;
+using BlackOps3.Content.Players;
 using System.Security.Permissions;
+using Terraria.GameContent.ObjectInteractions;
 
-namespace BoneTest.Content.Utils.Functions
+namespace BlackOps3.Content.Utils.Functions
 {
     public abstract class PerkMachine : ModTile
     {
@@ -56,6 +57,14 @@ namespace BoneTest.Content.Utils.Functions
             }
             Main.NewText(priceIndex,Color.Red);
             return true;
+        }
+        public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) 
+        {
+            return true;
+        }
+        public override void MouseOver(int i, int j) {
+            Player player = Main.LocalPlayer;
+            player.noThrow = 2; 
         }
     }
 }

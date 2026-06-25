@@ -1,10 +1,10 @@
 
 using System.Collections.Generic;
 using Terraria.ModLoader;
-using BoneTest.Content.Items.Weapons;
-using BoneTest.Content.Items.Weapons.BO3.Pistols;
+using BlackOps3.Content.Items.Weapons;
+using BlackOps3.Content.Items.Weapons.BO3.Pistols;
 
-namespace BoneTest.Content.Utils.Functions
+namespace BlackOps3.Content.Utils.Functions
 {
     public class PackAPunchProcesses : GlobalItem
     {

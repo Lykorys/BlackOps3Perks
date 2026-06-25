@@ -1,11 +1,11 @@
-using BoneTest.Content.NPCs.Bosses;
+using BlackOps3.Content.NPCs.Bosses;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-namespace BoneTest.Content.Items.Consumables
+namespace BlackOps3.Content.Items.Consumables
 {
 	// This is the item used to summon a boss, in this case the modded Minion Boss from Example Mod. For vanilla boss summons, see comments in SetStaticDefaults
 	public class TestBossSummonItem : ModItem

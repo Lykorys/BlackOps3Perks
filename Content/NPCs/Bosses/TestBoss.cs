@@ -1,4 +1,4 @@
-using BoneTest.Content.NPCs.Bosses.BossesAIs;
+using BlackOps3.Content.NPCs.Bosses.BossesAIs;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 //DD2SquireSonicBoom
-namespace BoneTest.Content.NPCs.Bosses
+namespace BlackOps3.Content.NPCs.Bosses
 {
     [AutoloadBossHead]
     public class TestBoss : ModNPC

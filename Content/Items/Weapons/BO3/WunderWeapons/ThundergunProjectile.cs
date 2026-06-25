@@ -5,9 +5,9 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using BoneTest.Content.Items.Tiles.Perks;
+using BlackOps3.Content.Items.Tiles.Perks;
 using Microsoft.Build.Evaluation;
-namespace BoneTest.Content.Items.Weapons.BO3.WunderWeapons
+namespace BlackOps3.Content.Items.Weapons.BO3.WunderWeapons
 {
     public class ThundergunProjectile : ModProjectile
     {

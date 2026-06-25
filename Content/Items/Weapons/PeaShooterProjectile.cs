@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
-namespace BoneTest.Content.Items.Weapons
+namespace BlackOps3.Content.Items.Weapons
 {
     public class PeaShooterProjectile : ModProjectile
     {

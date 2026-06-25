@@ -4,20 +4,20 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using BoneTest.Content.Utils.Functions;
-using BoneTest.Content.Config;
+using BlackOps3.Content.Utils.Functions;
+using BlackOps3.Content.Config;
 
-namespace BoneTest.Content.Items.Weapons.BO3.Pistols
+namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
 {
     
     public class KN44 : ModItem{
         public override string Texture => "Terraria/Images/Item_"+ItemID.CandyCornRifle;
-        SoundStyle shootSound = new SoundStyle("BoneTest/Content/Sound/Weapons/MR6shoot") {
+        SoundStyle shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 3
         };
-        SoundStyle reloadSound = new SoundStyle("BoneTest/Content/Sound/Weapons/MR6reload") {
+        SoundStyle reloadSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6reload") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 3
@@ -46,7 +46,7 @@ namespace BoneTest.Content.Items.Weapons.BO3.Pistols
             }
         }
         public override void SetStaticDefaults() {
-            Terraria.Localization.Language.GetOrRegister("Mods.BoneTest.Items.KN-44.DisplayName", () => "KN-44");
+            Terraria.Localization.Language.GetOrRegister("Mods.BlackOps3.Items.KN-44.DisplayName", () => "KN-44");
         }
 
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 

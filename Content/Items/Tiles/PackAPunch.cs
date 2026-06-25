@@ -1,4 +1,4 @@
-using BoneTest.Content.Items.Weapons;
+using BlackOps3.Content.Items.Weapons;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,11 +9,11 @@ using Terraria.ModLoader.IO; // Required for TagCompound
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using log4net.DateFormatter;
-using BoneTest.Content.Utils.Functions;
+using BlackOps3.Content.Utils.Functions;
 using System.Linq;
 using Mono.Cecil.Cil;
 using Steamworks;
-namespace BoneTest.Content.Items.Tiles
+namespace BlackOps3.Content.Items.Tiles
 {
     public class PackAPunchTile : ModTile
     {

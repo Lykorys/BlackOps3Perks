@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace BoneTest.Content
+namespace BlackOps3.Content
 {
     public class CameraSystem : ModSystem
     {

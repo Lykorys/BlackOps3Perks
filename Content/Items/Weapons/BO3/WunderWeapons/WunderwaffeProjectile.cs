@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using Terraria.Audio;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-namespace BoneTest.Content.Items.Weapons.BO3.WunderWeapons
+namespace BlackOps3.Content.Items.Weapons.BO3.WunderWeapons
 {
     public class WunderwaffeProjectile : ModProjectile
     {

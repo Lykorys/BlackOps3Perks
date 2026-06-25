@@ -6,10 +6,10 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.GameContent;
-using BoneTest.Content.Players;
-using BoneTest.Content.Utils.Functions;
+using BlackOps3.Content.Players;
+using BlackOps3.Content.Utils.Functions;
 
-namespace BoneTest.Content.Items.Tiles.Perks
+namespace BlackOps3.Content.Items.Tiles.Perks
 {
     public class ElectricCherryTile : PerkMachine
     {

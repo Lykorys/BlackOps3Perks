@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
-namespace BoneTest.Content.Players
+namespace BlackOps3.Content.Players
 {
 	public class ElectricCherryBuff : ModBuff
 	{

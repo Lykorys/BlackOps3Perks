@@ -4,7 +4,7 @@ using ReLogic.Content;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace BoneTest.Content.Config
+namespace BlackOps3.Content.Config
 {
     public class MyVideoMenu : ModMenu{
         private const int TotalFrames = 50;   // 54 slots minus the 4 empty ones

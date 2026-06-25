@@ -3,12 +3,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
-using BoneTest.Content.Utils.Functions;
+using BlackOps3.Content.Utils.Functions;
 using Terraria.DataStructures;
-using BoneTest.Content.Config;
+using BlackOps3.Content.Config;
 using System;
 
-namespace BoneTest.Content.Items.Weapons
+namespace BlackOps3.Content.Items.Weapons
 {
 	public class SuperShotgun : ModItem
 	{
@@ -17,7 +17,7 @@ namespace BoneTest.Content.Items.Weapons
         private int hookNumber = -1;
         private int hookTTL=20;
         public override string Texture => "Terraria/Images/Item_" + ItemID.Boomstick;
-		SoundStyle shootSound = new SoundStyle("BoneTest/Content/Sound/Weapons/MR6shoot") {
+		SoundStyle shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 3 // Prevents the sound from overlapping too many times

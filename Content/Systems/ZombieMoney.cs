@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
-using BoneTest.Content.Players;
+using BlackOps3.Content.Players;
 
-namespace BoneTest.Content.Systems
+namespace BlackOps3.Content.Systems
 {
     public class ZombieMoney : ModSystem
     {

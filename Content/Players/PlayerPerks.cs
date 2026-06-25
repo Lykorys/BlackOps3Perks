@@ -1,13 +1,13 @@
 using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using BoneTest.Content.Items.Tiles.Perks;
+using BlackOps3.Content.Items.Tiles.Perks;
 using System.Linq;
 using System.Reflection;
 using System;
 using System.Collections.Generic;
 using Terraria.DataStructures;
-namespace BoneTest.Content.Players
+namespace BlackOps3.Content.Players
 {
     
     

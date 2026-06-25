@@ -1,14 +1,14 @@
 using System; 
 using System.Collections.Generic;
-using BoneTest.Content.Utils.Effects;
+using BlackOps3.Content.Utils.Effects;
 using Terraria.Audio;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using BoneTest.Content.Config;
+using BlackOps3.Content.Config;
 
-namespace BoneTest.Content.NPCs.Bosses.BossesAIs
+namespace BlackOps3.Content.NPCs.Bosses.BossesAIs
 {
     public class TestBossAI
     {

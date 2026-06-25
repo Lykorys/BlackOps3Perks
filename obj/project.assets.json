@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gevan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\BoneTest\\BoneTest.csproj",
-      "projectName": "BoneTest",
-      "projectPath": "C:\\Users\\gevan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\BoneTest\\BoneTest.csproj",
+      "projectUniqueName": "C:\\Users\\gevan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\BlackOps3\\BlackOps3.csproj",
+      "projectName": "BlackOps3",
+      "projectPath": "C:\\Users\\gevan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\BlackOps3\\BlackOps3.csproj",
       "packagesPath": "C:\\Users\\gevan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gevan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\BoneTest\\obj\\",
+      "outputPath": "C:\\Users\\gevan\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\BlackOps3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gevan\\AppData\\Roaming\\NuGet\\NuGet.Config"

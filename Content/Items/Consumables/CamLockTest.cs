@@ -3,7 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace BoneTest.Content.Items.Consumables
+namespace BlackOps3.Content.Items.Consumables
 {
 	public class CamLockTest : ModItem
 	{

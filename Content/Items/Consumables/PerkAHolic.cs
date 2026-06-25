@@ -4,8 +4,8 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using Terraria.Localization;
-using BoneTest.Content.Players;
-namespace BoneTest.Content.Items.Consumables
+using BlackOps3.Content.Players;
+namespace BlackOps3.Content.Items.Consumables
 {
 	public class PerkAHolic : ModItem
 	{

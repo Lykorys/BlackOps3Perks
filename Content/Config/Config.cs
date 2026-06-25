@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using Terraria.ModLoader.Config;
 
-namespace BoneTest.Content.Config // Make sure this matches your mod's namespace
+namespace BlackOps3.Content.Config // Make sure this matches your mod's namespace
 {
     public class BossConfig : ModConfig
     {

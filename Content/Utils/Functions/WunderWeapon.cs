@@ -7,10 +7,10 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using BoneTest.Content.Config;
-using BoneTest.Content.Players;
+using BlackOps3.Content.Config;
+using BlackOps3.Content.Players;
 using Humanizer;
-namespace BoneTest.Content.Utils.Functions
+namespace BlackOps3.Content.Utils.Functions
 {//todo fix you can reload with no bullet and reload exced max ammo
     public class WunderWeapon : GlobalItem
     {

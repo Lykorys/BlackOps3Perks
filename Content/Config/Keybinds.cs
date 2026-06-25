@@ -1,5 +1,5 @@
 using Terraria.ModLoader;
-namespace BoneTest.Content.Config
+namespace BlackOps3.Content.Config
 {
 	public class KeybindSystem : ModSystem
 	{

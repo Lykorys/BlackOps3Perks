@@ -17,7 +17,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Terraria.Utilities;
 
-namespace BoneTest.Content.NPCs
+namespace BlackOps3.Content.NPCs
 {
     [AutoloadHead]
     public class TestVillager : ModNPC

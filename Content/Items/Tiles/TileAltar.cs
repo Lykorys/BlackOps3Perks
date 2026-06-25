@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework.Graphics; // Required for SpriteBatch and Texture2D
 
-namespace BoneTest.Content.Items.Tiles
+namespace BlackOps3.Content.Items.Tiles
 {
     public class AltarTile : ModTile
     {

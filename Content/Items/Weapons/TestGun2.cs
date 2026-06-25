@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace BoneTest.Content.Items.Weapons
+namespace BlackOps3.Content.Items.Weapons
 {
     public class TestGun2 : ModItem{
 		public override string Texture => "Terraria/Images/Item_" + ItemID.PhoenixBlaster;

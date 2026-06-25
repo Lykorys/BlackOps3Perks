@@ -7,17 +7,17 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using BoneTest.Content.Utils.Functions;
-using BoneTest.Content.Config;
-namespace BoneTest.Content.Items.Weapons.BO3.Pistols
+using BlackOps3.Content.Utils.Functions;
+using BlackOps3.Content.Config;
+namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
 {
     public class RK5 : ModItem{
-        SoundStyle shootSound = new SoundStyle("BoneTest/Content/Sound/Weapons/RK5burst") {
+        SoundStyle shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/RK5burst") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 9
         };
-        SoundStyle reloadSound = new SoundStyle("BoneTest/Content/Sound/Weapons/RK5reload") {
+        SoundStyle reloadSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/RK5reload") {
             Volume = 0.8f,
             Pitch = 0.1f,
             MaxInstances = 3
@@ -46,7 +46,7 @@ namespace BoneTest.Content.Items.Weapons.BO3.Pistols
             }
         }
         public override void SetStaticDefaults() {
-            Terraria.Localization.Language.GetOrRegister("Mods.BoneTest.Items.RK5.DisplayName", () => "RK5");
+            Terraria.Localization.Language.GetOrRegister("Mods.BlackOps3.Items.RK5.DisplayName", () => "RK5");
         }
         
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 

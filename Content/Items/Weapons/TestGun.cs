@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace BoneTest.Content.Items.Weapons
+namespace BlackOps3.Content.Items.Weapons
 {
     public class TestGun : ModItem{
 		public override void SetStaticDefaults()
