@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Terraria.GameContent;
 using BlackOps3.Content.Players;
-using BlackOps3.Content.Utils.Functions;
+using BlackOps3.Content.Systems;
 
 namespace BlackOps3.Content.Items.Tiles.Perks
 {

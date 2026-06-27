@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using BlackOps3.Content.Items.Weapons;
 using BlackOps3.Content.Items.Weapons.BO3.Pistols;
 
-namespace BlackOps3.Content.Utils.Functions
+namespace BlackOps3.Content.Systems
 {
     public class PackAPunchProcesses : GlobalItem
     {

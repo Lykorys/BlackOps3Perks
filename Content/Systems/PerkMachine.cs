@@ -8,7 +8,7 @@ using System.Security.Permissions;
 using Terraria.GameContent.ObjectInteractions;
 using System.Linq;
 
-namespace BlackOps3.Content.Utils.Functions
+namespace BlackOps3.Content.Systems
 {
     public abstract class PerkMachine : ModTile
     {
