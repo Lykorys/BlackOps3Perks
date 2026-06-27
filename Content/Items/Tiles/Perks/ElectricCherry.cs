@@ -15,7 +15,6 @@ namespace BlackOps3.Content.Items.Tiles.Perks
     {
         public override string Texture => "Terraria/Images/Tiles_26"; 
         public override Perk perk => new ElectricCherry();
-        public override int[] prices => [500, 1500, 3000, 4500];
         public override void SetStaticDefaults() {
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;

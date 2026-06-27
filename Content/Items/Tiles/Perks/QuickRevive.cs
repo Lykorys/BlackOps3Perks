@@ -15,7 +15,6 @@ namespace BlackOps3.Content.Items.Tiles.Perks
     public class QuickReviveTile : PerkMachine
     {
         public override Perk perk => new QuickRevive();
-        public override int[] prices => [500, 1500, 3000, 4500];
         public override string Texture => "Terraria/Images/Tiles_26"; 
         public override void SetStaticDefaults() {
             Main.tileFrameImportant[Type] = true;

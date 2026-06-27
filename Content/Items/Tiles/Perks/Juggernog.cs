@@ -13,7 +13,6 @@ namespace BlackOps3.Content.Items.Tiles.Perks
     public class JuggernogTile : PerkMachine
     {
         public override Perk perk => new Juggernog();
-        public override int[] prices => [500, 1500, 3000, 4500];
         public override void SetStaticDefaults() {
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;

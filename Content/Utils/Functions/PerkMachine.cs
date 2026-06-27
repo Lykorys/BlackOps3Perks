@@ -24,7 +24,8 @@ namespace BlackOps3.Content.Utils.Functions
                 {
                     modPlayer.zombieMoney-=perk.prices[playerPerk.tier];
                     playerPerk.tier++;
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Tink, player.position);
+                    if(playerPerk.tier==playerPerk.maxTier) Terraria.Audio.SoundEngine.PlaySound(SoundID.Item37, player.position);
+                    else Terraria.Audio.SoundEngine.PlaySound(SoundID.Tink, player.position);
                     Main.NewText(playerPerk.tier,Color.Blue);
                 }
             }
