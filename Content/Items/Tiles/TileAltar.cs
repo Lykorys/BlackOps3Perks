@@ -1,10 +1,10 @@
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.GameContent; // Added for TextureAssets
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
-using Microsoft.Xna.Framework.Graphics; // Required for SpriteBatch and Texture2D
+using Microsoft.Xna.Framework.Graphics; 
 
 namespace BlackOps3.Content.Items.Tiles
 {

@@ -8,7 +8,8 @@ namespace BlackOps3.Content.Players
         
         public string perkName => GetType().Name;
         public int tier = 1;
-        public int maxTier = 5;
+        public abstract int maxTier {get;}
+        public abstract int[] prices {get;}
         public abstract Texture2D perkLogo {get;}
         public abstract void ApplyEffect(PlayerPerks playerPerks);
     }
@@ -21,6 +22,8 @@ namespace BlackOps3.Content.Players
         Tier 4 : +10 def pene
         Tier 5 : double all projectile
         */
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/DoubleTapLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
@@ -42,6 +45,8 @@ namespace BlackOps3.Content.Players
         Tier 4 : Stun ennemies
         Tier 5 : Aura can chain lightning up to 3 ennemies
         */
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/ElectricCherryLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
@@ -65,6 +70,8 @@ namespace BlackOps3.Content.Players
         Tier 4 : +100hp
         Tier 5 : +15% de DR
         */
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/JuggernogLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
@@ -86,6 +93,8 @@ namespace BlackOps3.Content.Players
         Tier 4 : Bigger pylon range 
         Tier 5 : Upon death coins are kept
         */
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/MuleKickLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
@@ -107,14 +116,13 @@ namespace BlackOps3.Content.Players
         Tier 4 : revive at full hp
         Tier 5 : keep all perks upon revival
         */
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/QuickReviveLogo").Value;
-        
-
-
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
-            if(tier>=1)perkPlayer.Player.moveSpeed+=0.15f;
-            if(tier>=2)perkPlayer.Player.runAcceleration+=0.10f;
+            if(tier>=1);
+            if(tier>=2);
             if(tier>=3);
             if(tier>=4);
             if(tier>=5);
@@ -130,6 +138,8 @@ namespace BlackOps3.Content.Players
         Tier 4 : Bigger mag cap
         Tier 5 : Upon reload drop the mag and create a mine at the player pos || Upon kill chance to gain back ammo
         */
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo =>ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/SpeedColaLogo").Value;
 
         public override void ApplyEffect(PlayerPerks perkPlayer)
@@ -151,6 +161,8 @@ namespace BlackOps3.Content.Players
         Tier 4 : longer dash size
         Tier 5 : Quicker dash reset
         */
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/StaminUpLogo").Value;
 
         public override void ApplyEffect(PlayerPerks perkPlayer)
@@ -173,7 +185,8 @@ namespace BlackOps3.Content.Players
         Tier 4 : +2 max spawn 
         Tier 5 : ameliore l'effet de poison et de ralentissement. Si vous utilisez une armure summon gagnez +0.2hp/s pour chaque araignée vivante 
         */
-
+        public override int maxTier { get; } = 5;
+        public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/ElectricCherryLogo").Value;
         
         public override void ApplyEffect(PlayerPerks perkPlayer)

@@ -7,13 +7,12 @@ using System.Reflection;
 using System;
 using System.Collections.Generic;
 using Terraria.DataStructures;
+using Terraria.ModLoader.IO;
 namespace BlackOps3.Content.Players
 {
-    
-    //TODO save perk limit after dc
     public class PlayerPerks : ModPlayer
     {
-        public int zombieMoney = 10000;
+        public int zombieMoney = 10000; // TODO doubles money in event and for every event mob killed should bring money
         public bool isReloading = false;
         public float reloadSpeed = 1f;
         public float magSizeMult= 1f;
@@ -34,7 +33,6 @@ namespace BlackOps3.Content.Players
         {
             var perkTypes = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => type.IsSubclassOf(typeof(Perk)) && !type.IsAbstract);
-            int oldMax = maxPerks;
             maxPerks= perkTypes.Count();
             foreach (Type type in perkTypes)
             {
@@ -47,7 +45,6 @@ namespace BlackOps3.Content.Players
                     ActivePerks[perkInstance.perkName].tier=perkInstance.maxTier;
                 }
             }
-            maxPerks=oldMax;
             Main.NewText("Perkaholic Activated! All perks granted.",Color.Cyan);
         }
         
@@ -94,7 +91,6 @@ namespace BlackOps3.Content.Players
             ClearPerks();
             base.Kill(damage, hitDirection, pvp, damageSource);
         }
-        /*
         public override void SaveData(TagCompound tag)
         {
             List<TagCompound> savedPerks = new List<TagCompound>();
@@ -106,13 +102,16 @@ namespace BlackOps3.Content.Players
                 savedPerks.Add(perkTag);
             }
             tag["ownedPerksList"] = savedPerks;
+            tag["perkLimit"] = maxPerks;
         }
 
         public override void LoadData(TagCompound tag)
         {
-            ActivePerks.Clear();
-            if (tag.ContainsKey("ownedPerksList"))
+            if (tag.ContainsKey("ownedPerksList") && tag.ContainsKey("perkLimit"))
             {
+                Main.NewText(tag["ownedPerksList"]);
+                maxPerks = tag.GetInt("perkLimit");
+                Main.NewText(maxPerks);
                 var savedPerks = tag.GetList<TagCompound>("ownedPerksList");
                 foreach (TagCompound perkTag in savedPerks)
                 {
@@ -126,7 +125,7 @@ namespace BlackOps3.Content.Players
                     }
                 }
             }
-        }*/
+        }
         
 
         public void applyPerkBuff(int type, int timeToAdd,float modifier)//todo try 

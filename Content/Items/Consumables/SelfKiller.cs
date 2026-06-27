@@ -23,12 +23,9 @@ namespace BlackOps3.Content.Items.Consumables
 		}
 
 		public override bool? UseItem(Player player) {
-			player.KillMe(PlayerDeathReason.ByCustomReason(NetworkText.FromLiteral($"{player.name} pressed the big red button.")), 9999, 0);
-            player.dead = false;
-            player.respawnTimer = 0;
-            player.ghost = false;
             PlayerPerks modPlayer = player.GetModPlayer<PlayerPerks>();
-            modPlayer.zombieMoney+=100000;
+            modPlayer.zombieMoney=0;
+			modPlayer.ClearPerks();
             return true;
         }
 	}

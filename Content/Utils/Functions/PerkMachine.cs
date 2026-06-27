@@ -13,7 +13,6 @@ namespace BlackOps3.Content.Utils.Functions
     public abstract class PerkMachine : ModTile
     {
         public abstract Perk perk {get;}
-        public abstract int[] prices {get;}
         public override bool RightClick(int i, int j)
         {
             Player player = Main.LocalPlayer;
@@ -21,9 +20,9 @@ namespace BlackOps3.Content.Utils.Functions
             if (modPlayer.HasPerk(perk.perkName))
             {
                 Perk playerPerk =modPlayer.ActivePerks[perk.perkName];
-                if(playerPerk.tier < prices.Length && modPlayer.zombieMoney >= prices[playerPerk.tier])
+                if(playerPerk.tier < perk.prices.Length && modPlayer.zombieMoney >= perk.prices[playerPerk.tier])
                 {
-                    modPlayer.zombieMoney-=prices[playerPerk.tier];
+                    modPlayer.zombieMoney-=perk.prices[playerPerk.tier];
                     playerPerk.tier++;
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Tink, player.position);
                     Main.NewText(playerPerk.tier,Color.Blue);
@@ -32,10 +31,10 @@ namespace BlackOps3.Content.Utils.Functions
             else
             {
                 if(modPlayer.ActivePerks.Count == modPlayer.maxPerks) return false;
-                if(modPlayer.ActivePerks.Count < modPlayer.maxPerks && modPlayer.zombieMoney >= prices[0] )
+                if(modPlayer.ActivePerks.Count < modPlayer.maxPerks && modPlayer.zombieMoney >= perk.prices[0] )
                 {
                     modPlayer.AddPerk(perk);
-                    modPlayer.zombieMoney-=prices[0];
+                    modPlayer.zombieMoney-=perk.prices[0];
                     modPlayer.ActivePerks[perk.perkName].tier=1;
                     Main.NewText(modPlayer.ActivePerks[perk.perkName].tier,Color.Black);
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item3, player.position);
