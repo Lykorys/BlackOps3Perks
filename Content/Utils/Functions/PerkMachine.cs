@@ -6,6 +6,7 @@ using Terraria.ModLoader;
 using BlackOps3.Content.Players;
 using System.Security.Permissions;
 using Terraria.GameContent.ObjectInteractions;
+using System.Linq;
 
 namespace BlackOps3.Content.Utils.Functions
 {
@@ -18,45 +19,48 @@ namespace BlackOps3.Content.Utils.Functions
         {
             Player player = Main.LocalPlayer;
             PlayerPerks modPlayer = player.GetModPlayer<PlayerPerks>();
-            if(priceIndex < prices.Length)
-            {
-                if (modPlayer.zombieMoney >= prices[priceIndex])
+            if(modPlayer.ActivePerks.Count < modPlayer.maxPerks){
+                if(priceIndex < prices.Length)
                 {
-                    if (modPlayer.HasPerk(perk.perkName))
-                    {
-                        modPlayer.ActivePerks[perk.perkName].tier++;
-                        modPlayer.zombieMoney-=prices[priceIndex];
-                        priceIndex++;
-                        Main.NewText(priceIndex,Color.Blue);
-                        
-                    }
-                    else
-                    {
-                        modPlayer.AddPerk(perk);
-                        modPlayer.zombieMoney-=prices[priceIndex];
-                        priceIndex=1;
-                        Main.NewText(priceIndex,Color.Black);
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item3, player.position);
-                    }
-                }
-            }
-            else
-            {
-                if (!modPlayer.HasPerk(perk.perkName))
-                {
-                    priceIndex=0;
                     if (modPlayer.zombieMoney >= prices[priceIndex])
                     {
-                        modPlayer.AddPerk(perk);
-                        modPlayer.zombieMoney-=prices[priceIndex];
-                        priceIndex=1;
-                        Main.NewText(priceIndex,Color.Black);
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item3, player.position);
+                        if (modPlayer.HasPerk(perk.perkName))
+                        {
+                            modPlayer.ActivePerks[perk.perkName].tier++;
+                            modPlayer.zombieMoney-=prices[priceIndex];
+                            priceIndex++;
+                            Main.NewText(priceIndex,Color.Blue);
+                            
+                        }
+                        else
+                        {
+                            modPlayer.AddPerk(perk);
+                            modPlayer.zombieMoney-=prices[priceIndex];
+                            priceIndex=1;
+                            Main.NewText(priceIndex,Color.Black);
+                            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item3, player.position);
+                        }
                     }
-                } 
+                }
+                else
+                {
+                    if (!modPlayer.HasPerk(perk.perkName))
+                    {
+                        priceIndex=0;
+                        if (modPlayer.zombieMoney >= prices[priceIndex])
+                        {
+                            modPlayer.AddPerk(perk);
+                            modPlayer.zombieMoney-=prices[priceIndex];
+                            priceIndex=1;
+                            Main.NewText(priceIndex,Color.Black);
+                            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item3, player.position);
+                        }
+                    } 
+                }
+                Main.NewText(priceIndex,Color.Red);
+                return true;
             }
-            Main.NewText(priceIndex,Color.Red);
-            return true;
+            return false;
         }
         public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings) 
         {

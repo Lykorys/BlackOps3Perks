@@ -15,11 +15,11 @@ namespace BlackOps3.Content.Players
     public class DoubleTap : Perk
     {
         /*
-        Tier 1 : 
-        Tier 2 :
-        Tier 3 : 
-        Tier 4 : 
-        Tier 5 : 
+        Tier 1 : 30% fire rate
+        Tier 2 : 10% dmg increase
+        Tier 3 : 10% crit chance
+        Tier 4 : +10 def pene
+        Tier 5 : double all projectile
         */
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/DoubleTapLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
@@ -35,7 +35,7 @@ namespace BlackOps3.Content.Players
         Tier 2 : Speed boost after reload
         Tier 3 : Electric debuff to ennemies on hit DOT
         Tier 4 : Stun ennemies
-        Tier 5 : 
+        Tier 5 : Aura can chain lightning up to 3 ennemies
         */
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/ElectricCherryLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
@@ -49,18 +49,18 @@ namespace BlackOps3.Content.Players
         /*
         Tier 1 : +5 defense
         Tier 2 : +50% kb resistance
-        Tier 3 : 
+        Tier 3 : +10% life regen increase
         Tier 4 : +100hp
         Tier 5 : +15% de DR
         */
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/JuggernogLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
-            if(tier>=1)perkPlayer.Player.endurance+=0.15f;
-            if (tier >= 2)
-            {
-                perkPlayer.Player.moveSpeed+=5f;
-            } 
+            if(tier>=1)perkPlayer.Player.statDefense+=5;
+            if(tier>=2);
+            if(tier>=3)perkPlayer.Player.lifeRegen+= (int)(1.10f *perkPlayer.Player.lifeRegen);
+            if(tier>=4)perkPlayer.Player.statLifeMax2+=100;
+            if(tier>=5)perkPlayer.Player.endurance+=0.15f;
             
         }
     }
@@ -68,15 +68,20 @@ namespace BlackOps3.Content.Players
     public class MuleKick : Perk
     {
         /*
-        Tier 1 : 
-        Tier 2 :
-        Tier 3 : 
-        Tier 4 : 
-        Tier 5 : 
+        Tier 1 : Faster mining speed
+        Tier 2 : NPCs cost less
+        Tier 3 : Increase interaction range
+        Tier 4 : Bigger pylon range 
+        Tier 5 : Upon death coins are kept
         */
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/MuleKickLogo").Value;
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
+            if(tier>=1)perkPlayer.Player.moveSpeed+=0.15f;
+            if(tier>=2)perkPlayer.Player.runAcceleration+=0.10f;
+            if(tier>=3);
+            if(tier>=4);
+            if(tier>=5);
             perkPlayer.magSizeMult += 0.3f;
         }
     }
@@ -84,11 +89,11 @@ namespace BlackOps3.Content.Players
     public class QuickRevive : Perk
     {  
         /*
-        Tier 1 : 
-        Tier 2 :
-        Tier 3 : 
-        Tier 4 : 
-        Tier 5 : 
+        Tier 1 : One revive
+        Tier 2 : Temporary speed boost after revive
+        Tier 3 : Temporary hp boost upon revive
+        Tier 4 : revive at full hp
+        Tier 5 : keep all perks upon revival
         */
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/QuickReviveLogo").Value;
         
@@ -96,23 +101,32 @@ namespace BlackOps3.Content.Players
 
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
+            if(tier>=1)perkPlayer.Player.moveSpeed+=0.15f;
+            if(tier>=2)perkPlayer.Player.runAcceleration+=0.10f;
+            if(tier>=3);
+            if(tier>=4);
+            if(tier>=5);
         }
     }
 
     public class SpeedCola : Perk
     {
         /*
-        Tier 1 : 
-        Tier 2 :
-        Tier 3 : 
-        Tier 4 : 
-        Tier 5 : 
+        Tier 1 : Quicker reload
+        Tier 2 : Chance to not consume ammo upon reload
+        Tier 3 : Speed boost upon reload
+        Tier 4 : Bigger mag cap
+        Tier 5 : Upon reload drop the mag and create a mine at the player pos || Upon kill chance to gain back ammo
         */
         public override Texture2D perkLogo =>ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/SpeedColaLogo").Value;
 
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
-            perkPlayer.Player.moveSpeed += 0.5f;
+            if(tier>=1)perkPlayer.Player.moveSpeed+=0.15f;
+            if(tier>=2)perkPlayer.Player.runAcceleration+=0.10f;
+            if(tier>=3);
+            if(tier>=4);
+            if(tier>=5);
         }
     }
 
@@ -121,15 +135,20 @@ namespace BlackOps3.Content.Players
         /*
         Tier 1 : 10% speed boost
         Tier 2 : 10% acceleration 
-        Tier 3 : 10% max speed
+        Tier 3 : Immune to slow debuff
         Tier 4 : longer dash size
-        Tier 5 : 
+        Tier 5 : Quicker dash reset
         */
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/StaminUpLogo").Value;
 
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
-            perkPlayer.Player.moveSpeed *= 1.21f;
+            if(tier>=1)perkPlayer.Player.moveSpeed+=0.15f;
+            if(tier>=2)perkPlayer.Player.runAcceleration+=0.10f;
+            if(tier>=3);
+            if(tier>=4);
+            if(tier>=5);
+            
         }
     }
 

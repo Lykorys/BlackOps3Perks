@@ -187,6 +187,11 @@ Items: {
 		Tooltip: ""
 		DisplayName: Up A Perk
 	}
+
+	Moneygiver: {
+		DisplayName: Moneygiver
+		Tooltip: ""
+	}
 }
 
 NPCs: {
