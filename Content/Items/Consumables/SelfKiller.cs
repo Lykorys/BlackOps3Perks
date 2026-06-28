@@ -26,6 +26,7 @@ namespace BlackOps3.Content.Items.Consumables
             PlayerPerks modPlayer = player.GetModPlayer<PlayerPerks>();
             modPlayer.zombieMoney=0;
 			modPlayer.ClearPerks();
+			modPlayer.maxPerks=4;
             return true;
         }
 	}

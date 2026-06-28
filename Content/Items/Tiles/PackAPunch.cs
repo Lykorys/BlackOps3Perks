@@ -9,7 +9,7 @@ using Terraria.ModLoader.IO; // Required for TagCompound
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
 using log4net.DateFormatter;
-using BlackOps3.Content.Utils.Functions;
+using BlackOps3.Content.Systems;
 using System.Linq;
 using Mono.Cecil.Cil;
 using Steamworks;

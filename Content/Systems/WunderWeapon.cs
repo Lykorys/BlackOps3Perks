@@ -11,7 +11,7 @@ using BlackOps3.Content.Config;
 using BlackOps3.Content.Players;
 using Humanizer;
 namespace BlackOps3.Content.Systems
-{//todo fix you can reload with no bullet
+{
     public class WunderWeapon : Reloadable
     {
         public int ammoReserve = 0;

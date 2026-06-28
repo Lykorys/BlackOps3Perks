@@ -13,7 +13,7 @@ namespace BlackOps3.Content.Systems
     {
         
         private int numberOfPerks = 0;
-        private int nbOfPerksInALine = 8;//TODO fix ui for more than this nb of perks
+        private int nbOfPerksInALine = 8;
         private int offsetLeft = 150;
         private int offsetBottom = 150;
         public override void PostDrawInterface(SpriteBatch spriteBatch)
@@ -32,17 +32,10 @@ namespace BlackOps3.Content.Systems
         }
         public void drawPerks( Texture2D img, SpriteBatch spriteBatch)
         {
-            if (numberOfPerks > nbOfPerksInALine)
-            {
-                numberOfPerks-=nbOfPerksInALine; 
-                offsetBottom-=150;
-            } 
-            
-            Vector2 position = new Vector2(offsetLeft+numberOfPerks*32,Main.screenHeight-offsetBottom);
-
+            int column = numberOfPerks % nbOfPerksInALine;
+            int row = numberOfPerks / nbOfPerksInALine;
+            Vector2 position = new Vector2(offsetLeft + column * 32, Main.screenHeight - offsetBottom - row * 32);
             spriteBatch.Draw(img, position, null, Color.White, 0f, img.Size() / 2f, 1f, SpriteEffects.None, 0f);
-
-            
         }
     }
 }

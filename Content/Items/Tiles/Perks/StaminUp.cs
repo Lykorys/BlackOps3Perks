@@ -45,11 +45,11 @@ namespace BlackOps3.Content.Items.Tiles.Perks
     }
     public class StaminUpItem : ModItem 
     {
-        public override string Texture => "Terraria/Images/Tiles_26";
+        public override string Texture => "BlackOps3/Content/Players/PerksLogo/StaminUpLogo";
         public override void SetDefaults() {
             Item.DefaultToPlaceableTile(ModContent.TileType<StaminUpTile>(), 1);
-            Item.width = 28;
-            Item.height = 14;
+            Item.width = 32;
+            Item.height = 32;
         }
         public override void AddRecipes() {
             CreateRecipe()
@@ -57,12 +57,6 @@ namespace BlackOps3.Content.Items.Tiles.Perks
                 .AddIngredient(ItemID.TissueSample, 10)
                 .AddTile(TileID.Anvils)
                 .Register();
-        }
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
-            Rectangle sourceRect = new Rectangle(54, 0, 54, 34); 
-            Texture2D texture = TextureAssets.Item[Type].Value;
-            spriteBatch.Draw(texture, position, sourceRect, drawColor, 0f, origin, scale * 0.5f, SpriteEffects.None, 0f);
-            return false;
         }
     }
 }

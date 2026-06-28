@@ -22,10 +22,10 @@ namespace BlackOps3.Content.Items.Tiles.Perks
             
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
             TileObjectData.newTile.Width = 3;
-            TileObjectData.newTile.Height = 4;
+            TileObjectData.newTile.Height = 5;
             TileObjectData.newTile.CoordinateWidth = 16;
-            TileObjectData.newTile.CoordinatePadding = 2;
-            TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 16 };
+            TileObjectData.newTile.CoordinatePadding = 0;
+            TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 16,16};
             TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile | AnchorType.SolidWithTop, TileObjectData.newTile.Width, 0);
             TileObjectData.addTile(Type);
 
@@ -53,14 +53,11 @@ namespace BlackOps3.Content.Items.Tiles.Perks
 
     public class SpeedColaItem : ModItem 
     {
-        public override string Texture => "Terraria/Images/Tiles_26"; // temporary texture reference
-
+        public override string Texture => "BlackOps3/Content/Players/PerksLogo/SpeedColaLogo";
         public override void SetDefaults() {
-            Item.DefaultToPlaceableTile(ModContent.TileType<SpeedColaTile>()); // Cleans up and configures modern placement mechanics!
-            Item.width = 28;
-            Item.height = 14;
-            Item.value = Item.sellPrice(gold: 1);
-            Item.rare = ItemRarityID.Blue;
+            Item.DefaultToPlaceableTile(ModContent.TileType<SpeedColaTile>());
+            Item.width = 32;
+            Item.height = 32;
         }
 
         public override void AddRecipes() {
@@ -69,13 +66,6 @@ namespace BlackOps3.Content.Items.Tiles.Perks
                 .AddIngredient(ItemID.TissueSample, 10)
                 .AddTile(TileID.Anvils)
                 .Register();
-        }
-
-        public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
-            Rectangle sourceRect = new Rectangle(54, 0, 54, 34); 
-            Texture2D texture = TextureAssets.Item[Type].Value;
-            spriteBatch.Draw(texture, position, sourceRect, drawColor, 0f, origin, scale * 0.5f, SpriteEffects.None, 0f);
-            return false;
         }
     }
 }

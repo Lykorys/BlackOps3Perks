@@ -6,6 +6,8 @@ using BlackOps3.Content.Items.Weapons.BO3.Pistols;
 
 namespace BlackOps3.Content.Systems
 {
+    //TODO implements all PaP and mb 2nd PaP
+    
     public class PackAPunchProcesses : GlobalItem
     {
         public static readonly int Duration = 240;
