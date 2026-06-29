@@ -12,7 +12,7 @@ using BlackOps3.Content.Players;
 using Humanizer;
 namespace BlackOps3.Content.Systems
 {
-    public class WunderWeapon : Reloadable
+    public class WunderWeapon : Reloadable //TODO fix reload 
     {
         public int ammoReserve = 0;
         public override void SetDefaults(Item entity)
@@ -20,17 +20,7 @@ namespace BlackOps3.Content.Systems
             shootSoundNumber=whenToPlaySound;
             maxDefaultAmmo=magCapacity;
         }
-        public override bool canReload(Player player) => !isReloading && ammoReserve>0 && ammo < magCapacity;
-        public override bool CanUseItem(Item item, Player player)
-        {
-            if (isReloading) return false;
-            if (ammo <= 0) {
-                SoundEngine.PlaySound(SoundID.MenuTick, player.position);
-                return true;
-            }
-
-            return true;
-        }
+        public override bool canReload(Player player) => !(playerPerks?.isReloading ?? false) && ammoReserve>0 && ammo < magCapacity;
         public void removeBullets(int numberToRemove)
         {
             for(int _ = 0; _ < numberToRemove; _++)
@@ -38,13 +28,14 @@ namespace BlackOps3.Content.Systems
                 ammo--;
             }
         }
-        public void reload()
+        public override void reload(Player player)
         {
             if (!IsReloadable) return;
-            isReloading=true;
-            int ammoToRemove = magCapacity-ammo;
-            shootSoundNumber=whenToPlaySound;
-            while (ammoToRemove > 0 && ammoReserve>0) 
+            playerPerks = player.GetModPlayer<PlayerPerks>();
+            playerPerks.isReloading = true;
+            int ammoToRemove = magCapacity - ammo;
+            shootSoundNumber = whenToPlaySound;
+            while (ammoToRemove > 0 && ammoReserve > 0) 
             {
                 ammoReserve--;
                 ammoToRemove--;
@@ -101,18 +92,5 @@ namespace BlackOps3.Content.Systems
             }
         }
 
-        public override void reload(Player player)
-        {
-            if (!IsReloadable) return;
-            isReloading=true;
-            int ammoToRemove = magCapacity-ammo;
-            shootSoundNumber=whenToPlaySound;
-            while (ammoToRemove > 0 && ammoReserve>0) 
-            {
-                ammoReserve--;
-                ammoToRemove--;
-                ammo++;
-            }
-        }
     }
 }

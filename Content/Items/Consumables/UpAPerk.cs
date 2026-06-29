@@ -9,7 +9,6 @@ namespace BlackOps3.Content.Items.Consumables
 {
 	public class UpAPerk : ModItem
 	{
-        public override string Texture => "Terraria/Images/Item_" + ItemID.Acorn;
 		public override void SetDefaults() {
 			Item.width = 20;
 			Item.height = 20;
@@ -24,7 +23,7 @@ namespace BlackOps3.Content.Items.Consumables
 
 		public override bool? UseItem(Player player) {
             PlayerPerks modPlayer = player.GetModPlayer<PlayerPerks>();
-            modPlayer.maxPerks++;
+            modPlayer.perkLimit++;
             return true;
         }
 	}

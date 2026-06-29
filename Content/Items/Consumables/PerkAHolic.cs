@@ -9,10 +9,9 @@ namespace BlackOps3.Content.Items.Consumables
 {
 	public class PerkAHolic : ModItem
 	{
-        public override string Texture => "Terraria/Images/Item_" + ItemID.Pho;
 		public override void SetDefaults() {
-			Item.width = 20;
-			Item.height = 20;
+			Item.width = 32;
+			Item.height = 32;
 			Item.maxStack = 20;
 			Item.value = 100;
 			Item.rare = ItemRarityID.Blue;

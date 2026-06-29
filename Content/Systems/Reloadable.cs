@@ -10,18 +10,17 @@ using Terraria.ModLoader.IO;
 using BlackOps3.Content.Config;
 using BlackOps3.Content.Players;
 using Humanizer;
+using Terraria.DataStructures;
 namespace BlackOps3.Content.Systems
 {
     public abstract class Reloadable : GlobalItem
     {
-        
         public PlayerPerks playerPerks;
         public int chargeTimer = 0;
         public int reloadTime;
         public int ammo = 0;
         public int magCapacity;
         public int maxDefaultAmmo;
-        public bool isReloading = false;
         public override bool InstancePerEntity => true;
         public bool IsReloadable = false;
         public SoundStyle? reloadSound;
@@ -40,49 +39,43 @@ namespace BlackOps3.Content.Systems
         public override void HoldItem(Item item, Player player)
         {
             playerPerks = player.GetModPlayer<PlayerPerks>();
-            if(magCapacity==maxDefaultAmmo && playerPerks.HasPerk("MuleKick")) magCapacity=(int)(magCapacity*playerPerks.magSizeMult);
-            if (KeybindSystem.Reload.JustPressed) {
+            //if(magCapacity == maxDefaultAmmo) magCapacity = (int)(magCapacity * playerPerks.magSizeMult);
+            //if(playerPerks.magSizeMult==1f) magCapacity = maxDefaultAmmo;
+            //magCapacity = playerPerks.magSizeMult==1f ? maxDefaultAmmo : (int)(magCapacity * playerPerks.magSizeMult);
+            magCapacity = (int)(maxDefaultAmmo * playerPerks.magSizeMult);
+            if (!IsReloadable) return;
+
+            if (KeybindSystem.Reload.JustPressed && !playerPerks.isReloading) {
                 if (canReload(player)) {
-                    reload(player); 
+                    reload(player);
+                    chargeTimer = 0;
                 }
             }
-            if (!IsReloadable||!isReloading) return;
-            if (isReloading)
-            {
-                playerPerks ??= player.GetModPlayer<PlayerPerks>();
-                if(chargeTimer==5) playerPerks.isReloading=true;
-                if (reloadSound.HasValue&& ! hasPlayedReloadSound) {
-                    hasPlayedReloadSound=true;
-                    SoundEngine.PlaySound(reloadSound.Value, player.position);
-                }
-                player.itemTime = 2;
-                player.itemAnimation = 2;
 
-                if (chargeTimer < reloadTime)
-                {
-                    chargeTimer++;
-                }
-                else
-                {
-                    chargeTimer = 0;
-                    isReloading = false;
-                    hasPlayedReloadSound=false;
-                }
+            if (!playerPerks.isReloading) return;
+
+            if (reloadSound.HasValue && !hasPlayedReloadSound) {
+                hasPlayedReloadSound = true;
+                SoundEngine.PlaySound(reloadSound.Value, player.position);
+            }
+            player.itemTime = 2;
+            player.itemAnimation = 2;
+
+            if (chargeTimer < reloadTime)
+            {
+                chargeTimer++;
             }
             else
             {
-                playerPerks.isReloading=false;
                 chargeTimer = 0;
+                playerPerks.isReloading = false;
+                hasPlayedReloadSound = false;
             }
         }
         public override bool CanUseItem(Item item, Player player)
         {
-            if (isReloading) return false;
-            if (ammo <= 0) {
-                SoundEngine.PlaySound(SoundID.MenuTick, player.position);
-                return true;
-            }
-
+            playerPerks = player.GetModPlayer<PlayerPerks>();
+            if (playerPerks.isReloading) return false;
             return true;
         }
         public void playSound()

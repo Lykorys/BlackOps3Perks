@@ -52,6 +52,7 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
                 Gun.playSound();
                 Gun.removeBullets();
             }
+            else SoundEngine.PlaySound(SoundID.MenuTick, player.position);
             return false;
 		}
        

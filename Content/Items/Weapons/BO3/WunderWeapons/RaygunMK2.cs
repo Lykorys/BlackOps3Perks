@@ -39,8 +39,8 @@ namespace BlackOps3.Content.Items.Weapons.BO3.WunderWeapons
             if (Item.TryGetGlobalItem(out WunderWeapon gun)) {
                 gun.IsReloadable=true;
                 gun.ammo=15;
-                gun.magCapacity = 150;
-                gun.ammoReserve=15;
+                gun.magCapacity = 15;
+                gun.ammoReserve=150;
                 gun.reloadTime = (int)(60 * 2.98);
                 gun.reloadSound = reloadSound;
                 gun.shootSound= shootSound;

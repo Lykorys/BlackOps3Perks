@@ -8,6 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader.IO;
 using BlackOps3.Content.Systems;
 using BlackOps3.Content.Players;
+using Terraria.DataStructures;
 namespace BlackOps3.Content.Systems
 {
     public class ReloadableGun : Reloadable
@@ -21,7 +22,7 @@ namespace BlackOps3.Content.Systems
         public override void reload(Player player)
         {
             if (!IsReloadable) return;
-            isReloading=true;
+            playerPerks.isReloading = true;
             int ammoToRemove = magCapacity-ammo;
             shootSoundNumber=whenToPlaySound;
             int slot = AmmoFinderSystem.GetFirstBulletSlot(player);
@@ -43,7 +44,7 @@ namespace BlackOps3.Content.Systems
                 }
             }
         }
-        public override bool canReload(Player player) => !isReloading && GetTotalReserve(player)>0 && ammo < magCapacity;
+        public override bool canReload(Player player) => !(playerPerks?.isReloading ?? false) && GetTotalReserve(player)>0 && ammo < magCapacity;
         
         public override void PostDrawInInventory(Item item,SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
             if (!IsReloadable) return;
@@ -85,6 +86,16 @@ namespace BlackOps3.Content.Systems
                 Vector2.Zero, 
                 new Vector2(textScale)
             );
+        }
+        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+           if (ammo > 0 && loadedBullets.Count > 0) {
+                Projectile.NewProjectile(source, position, velocity, loadedBullets[0], damage, knockback, player.whoAmI);
+                playSound();
+                removeBullets();
+            }
+            else SoundEngine.PlaySound(SoundID.MenuTick, player.position);
+            return false;
         }
         public override void SaveData(Item item, TagCompound tag) {
             if (IsReloadable) {

@@ -44,16 +44,6 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
         public override void SetStaticDefaults() {
             Terraria.Localization.Language.GetOrRegister("Mods.BlackOps3.Items.RK5.DisplayName", () => "RK5");
         }
-        
-		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 
-		{
-           if (Gun.ammo > 0 && Gun.loadedBullets.Count > 0) {
-                Projectile.NewProjectile(source, position, velocity, Gun.loadedBullets[0], damage, knockback, player.whoAmI);
-                Gun.playSound();
-                Gun.removeBullets();
-            }
-            return false;
-		}
        
         public override void AddRecipes(){
             CreateRecipe()

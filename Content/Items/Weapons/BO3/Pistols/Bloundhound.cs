@@ -43,16 +43,6 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
                 gun.whenToPlaySound= Item.useAnimation/Item.useTime;
             }
         }
-
-		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 
-		{
-            if (Gun.loadedBullets.Count > 0) {
-                Projectile.NewProjectile(source, position, velocity, Gun.loadedBullets[0], damage, knockback, player.whoAmI);
-                Gun.playSound();
-                Gun.removeBullets();
-            }
-            return false;
-		}
        
         public override void AddRecipes(){
             CreateRecipe()

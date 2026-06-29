@@ -232,6 +232,7 @@ Projectiles: {
 	RaygunProjectile.DisplayName: Raygun Projectile
 	ThundergunProjectile.DisplayName: Thundergun Projectile
 	RaygunMK2Projectile.DisplayName: Raygun M K2 Projectile
+	ElectricAuraProj.DisplayName: Electric Aura Proj
 }
 
 Configs: {
@@ -291,5 +292,15 @@ Buffs: {
 	ElectricCherryBuff: {
 		DisplayName: Electric Cherry Buff
 		Description: Mods.BoneTest.Buffs.ElectricCherryBuff.Description
+	}
+
+	ElectricCherrySpeedBuff: {
+		DisplayName: Electric Cherry Speed Buff
+		Description: Mods.BlackOps3.Buffs.ElectricCherrySpeedBuff.Description
+	}
+
+	ElectricCherryStunDebuff: {
+		DisplayName: Electric Cherry Stun Debuff
+		Description: Mods.BlackOps3.Buffs.ElectricCherryStunDebuff.Description
 	}
 }

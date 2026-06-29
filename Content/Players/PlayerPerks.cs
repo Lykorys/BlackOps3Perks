@@ -12,16 +12,33 @@ namespace BlackOps3.Content.Players
 {
     public class PlayerPerks : ModPlayer
     {
+        public int perkLimit= 4;
+        public Dictionary<string, Perk> ActivePerks { get; private set; } = new();
         public int zombieMoney = 10000; // TODO doubles money in event and for every event mob killed should bring money
         public bool isReloading = false;
+        private bool wasReloadingLastFrame;
+
+        /*
+        #
+        #       PERKS 
+        #
+        */
         public float reloadSpeed = 1f;
         public float magSizeMult= 1f;
-        public int maxPerks= 4;
-        public Dictionary<string, Perk> ActivePerks { get; private set; } = new();
+        
+        public bool doubleAllProjectiles;
+        public bool NoNPCPylons;
+        public float ammoSaveChance;
+        public float dashLengthMod;
+        public float dashCooldownMod;
+        public bool keepCoinsOnDeath;
+
+
+
         public bool HasPerk(string perk) => ActivePerks.ContainsKey(perk);
         public void AddPerk(Perk perk) 
         {
-            if(ActivePerks.Count<maxPerks)
+            if(ActivePerks.Count<perkLimit)
                 if (!ActivePerks.TryGetValue(perk.perkName, out Perk value))
                     ActivePerks.Add(perk.perkName, perk);
                 else 
@@ -33,7 +50,7 @@ namespace BlackOps3.Content.Players
         {
             var perkTypes = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => type.IsSubclassOf(typeof(Perk)) && !type.IsAbstract);
-            maxPerks= perkTypes.Count();
+            perkLimit= perkTypes.Count();
             foreach (Type type in perkTypes)
             {
                 if (Activator.CreateInstance(type) is Perk perkInstance)
@@ -52,6 +69,13 @@ namespace BlackOps3.Content.Players
         public override void ResetEffects()
         {
             magSizeMult = 1f;
+            ammoSaveChance = 0f;
+            magSizeMult = 1f;
+            doubleAllProjectiles = false;
+            NoNPCPylons = false;
+            keepCoinsOnDeath = false;
+            dashLengthMod = 1f;
+            dashCooldownMod = 1f;
         }
 
         public override void PostUpdateEquips()
@@ -59,31 +83,48 @@ namespace BlackOps3.Content.Players
             foreach (var perk in ActivePerks.Values)
             {
                 perk.ApplyEffect(this);
-                
             }
+        }
+        public override void OnHitNPCWithProj(Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            foreach (var perk in ActivePerks.Values) perk.OnHitNPCWithProj(this, proj, target, hit, damageDone);
+        }
+
+        public override void OnHitNPCWithItem(Item item, NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            foreach (var perk in ActivePerks.Values) perk.OnHitNPCWithItem(this, item, target, hit, damageDone);
+        }
+
+        public override void OnHurt(Player.HurtInfo hurtInfo)
+        {
+            foreach (var perk in ActivePerks.Values) perk.OnHurt(this, hurtInfo);
+        }
+
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGlowDust, ref PlayerDeathReason damageSource)
+        {
+            foreach (var perk in ActivePerks.Values)
+            {
+                if (!perk.PreKill(this, damage, hitDirection, pvp, ref playSound, ref genGlowDust, ref damageSource))
+                    return false;
+            }
+            return true;
         }
         public override void PostUpdate()
         {
-            if (isReloading&&HasPerk("ElectricCherry"))//TODO generalize this system to a perk.Condition
+            if (isReloading && !wasReloadingLastFrame)
             {
-                
-                if(ActivePerks["ElectricCherry"].tier>=2){
-                    Player.AddBuff(ModContent.BuffType<ElectricCherryBuff>(),5);
-                    Main.NewText(ActivePerks["ElectricCherry"].tier);
+                foreach (var perk in ActivePerks.Values)
+                {
+                    perk.OnReloadStart(this);
                 }
-                Vector2 spawnPos = Player.Center;
-                int projWidth = 30;
-                int projHeight = 30;
-                Main.NewText(Player.Center);
-                
-                spawnPos.X -= projWidth / 2f;
-                spawnPos.Y -= projHeight / 2f;
-                Main.NewText(spawnPos);
-                Main.NewText("RELOADING");
-                int proj = Projectile.NewProjectile(Player.GetSource_FromThis(),spawnPos,Vector2.Zero,ModContent.ProjectileType<CherryLightning>(),150,0f,Player.whoAmI);
-                Main.projectile[proj].hostile = false;
-                Main.projectile[proj].friendly = true;
-                isReloading=false;
+            }
+            wasReloadingLastFrame = isReloading;
+            if(isReloading)
+            {
+                foreach (var perk in ActivePerks.Values)
+                {
+                    perk.DuringReload(this);
+                }
             }
         }
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
@@ -102,16 +143,14 @@ namespace BlackOps3.Content.Players
                 savedPerks.Add(perkTag);
             }
             tag["ownedPerksList"] = savedPerks;
-            tag["perkLimit"] = maxPerks;
+            tag["perkLimit"] = perkLimit;
         }
 
         public override void LoadData(TagCompound tag)
         {
             if (tag.ContainsKey("ownedPerksList") && tag.ContainsKey("perkLimit"))
             {
-                Main.NewText(tag["ownedPerksList"]);
-                maxPerks = tag.GetInt("perkLimit");
-                Main.NewText(maxPerks);
+                perkLimit = tag.GetInt("perkLimit");
                 var savedPerks = tag.GetList<TagCompound>("ownedPerksList");
                 foreach (TagCompound perkTag in savedPerks)
                 {

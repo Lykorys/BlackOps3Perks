@@ -27,12 +27,22 @@ namespace BlackOps3.Content.Items.Weapons.BO3.WunderWeapons
             Projectile.timeLeft = 600; 
             Projectile.aiStyle = 0;
             Projectile.spriteDirection = 1;
+            Main.projFrames[Projectile.type] = 4;
         }
         
         public override void AI()
         {
-            
             Projectile.rotation = Projectile.velocity.ToRotation();
+            Projectile.frameCounter++;
+            if (Projectile.frameCounter >= 4)
+            {
+                Projectile.frameCounter = 0;
+                Projectile.frame++;
+                if (Projectile.frame >= Main.projFrames[Projectile.type])
+                {
+                    Projectile.frame = 0;
+                }
+            }
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {

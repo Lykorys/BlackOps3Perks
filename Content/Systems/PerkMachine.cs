@@ -26,18 +26,16 @@ namespace BlackOps3.Content.Systems
                     playerPerk.tier++;
                     if(playerPerk.tier==playerPerk.maxTier) Terraria.Audio.SoundEngine.PlaySound(SoundID.Item37, player.position);
                     else Terraria.Audio.SoundEngine.PlaySound(SoundID.Tink, player.position);
-                    Main.NewText(playerPerk.tier,Color.Blue);
                 }
             }
             else
             {
-                if(modPlayer.ActivePerks.Count == modPlayer.maxPerks) return false;
-                if(modPlayer.ActivePerks.Count < modPlayer.maxPerks && modPlayer.zombieMoney >= perk.prices[0] )
+                if(modPlayer.ActivePerks.Count == modPlayer.perkLimit) return false;
+                if(modPlayer.ActivePerks.Count < modPlayer.perkLimit && modPlayer.zombieMoney >= perk.prices[0] )
                 {
                     modPlayer.AddPerk(perk);
                     modPlayer.zombieMoney-=perk.prices[0];
                     modPlayer.ActivePerks[perk.perkName].tier=1;
-                    Main.NewText(modPlayer.ActivePerks[perk.perkName].tier,Color.Black);
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item3, player.position);
                 }
             }
