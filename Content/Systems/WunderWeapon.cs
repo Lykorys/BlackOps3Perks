@@ -17,14 +17,8 @@ namespace BlackOps3.Content.Systems
         public int ammoReserve;
         
         public override void SetDefaults() => shootSoundNumber = whenToPlaySound; 
-        public override bool canReload(Player player) {
-            Main.NewText(playerPerks.isReloading,Color.Aquamarine);
-            Main.NewText(ammoReserve,Color.OrangeRed);
-            Main.NewText(ammo);
-            Main.NewText(magCapacity,Color.Gold);
-            Main.NewText(!playerPerks.isReloading && ammoReserve>0 && ammo < magCapacity,Color.SeaGreen);
-            return !playerPerks.isReloading && ammoReserve>0 && ammo < magCapacity;
-        } 
+        public override bool canReload(Player player) => !playerPerks.isReloading && ammoReserve>0 && ammo < magCapacity;
+         
         public void removeBullets(int numberToRemove)
         {
             for(int _ = 0; _ < numberToRemove; _++)

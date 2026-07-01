@@ -12,7 +12,7 @@ namespace BlackOps3.Content.NPCs.Bosses.BossesAIs
 {
     public class TestBossAI
     {
-        public static BossConfig config = ModContent.GetInstance<BossConfig>();
+        public static ModConfig config = ModContent.GetInstance<ModConfig>();
         private static bool switchedPhase = false;
         private static bool hasTPd= false;
         private static float phaseSwitchTreshold = 0.5f; 

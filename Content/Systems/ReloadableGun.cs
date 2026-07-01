@@ -46,15 +46,8 @@ namespace BlackOps3.Content.Systems
                 }
             }
         }
-        public override bool canReload(Player player)
-        {
-            Main.NewText(playerPerks.isReloading,Color.Aquamarine);
-            Main.NewText(GetTotalReserve(player)>0,Color.OrangeRed);
-            Main.NewText(ammo);
-            Main.NewText(magCapacity,Color.Gold);
-            Main.NewText(!playerPerks.isReloading && GetTotalReserve(player)>0 && ammo < magCapacity,Color.SeaGreen);
-            return !playerPerks.isReloading && GetTotalReserve(player)>0 && ammo < magCapacity;
-        } 
+        public override bool canReload(Player player) => !playerPerks.isReloading && GetTotalReserve(player)>0 && ammo < magCapacity;
+        
         
         public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
             Player player = Main.LocalPlayer;

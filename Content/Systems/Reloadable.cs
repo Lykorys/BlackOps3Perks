@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -6,15 +5,15 @@ using Terraria.GameContent;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 using BlackOps3.Content.Config;
 using BlackOps3.Content.Players;
-using Humanizer;
-using Terraria.DataStructures;
+
+
 namespace BlackOps3.Content.Systems
 {
     public abstract class Reloadable : ModItem
     {
+        public static ModConfig config = ModContent.GetInstance<ModConfig>();
         public PlayerPerks playerPerks;
         public int chargeTimer = 0;
         public int reloadTime;
@@ -34,7 +33,7 @@ namespace BlackOps3.Content.Systems
             playerPerks = player.GetModPlayer<PlayerPerks>();
             if(maxDefaultAmmo==0) maxDefaultAmmo=magCapacity;
             magCapacity = (int)(maxDefaultAmmo * playerPerks.magSizeMult);
-            if (KeybindSystem.Reload.JustPressed && !playerPerks.isReloading) {
+            if ((KeybindSystem.Reload.JustPressed && !playerPerks.isReloading) ||(ammo==0 && config.AutoReloadToggle)) {
                 if (canReload(player)) {
                     reload(player);
                     chargeTimer = 0;
