@@ -30,7 +30,7 @@ namespace BlackOps3.Content.Items.Weapons.BO3.WunderWeapons
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            int proj = Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.position,Vector2.Zero,ModContent.ProjectileType<CherryLightning>(),150,0f,-1);
+            int proj = Projectile.NewProjectile(Projectile.GetSource_FromThis(),Projectile.position,Vector2.Zero,ProjectileID.MeteorShot,150,0f,-1);
             Main.projectile[proj].hostile = false;
             Main.projectile[proj].friendly = true;
             return true;

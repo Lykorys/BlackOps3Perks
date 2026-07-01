@@ -8,20 +8,10 @@ using BlackOps3.Content.Systems;
 
 namespace BlackOps3.Content.Items.Weapons.BO3.WunderWeapons
 {
-    public class RaygunMK2: ModItem{
-        SoundStyle shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot") {
-            Volume = 0.8f,
-            Pitch = 0.1f,
-            MaxInstances = 3
-        };
-        SoundStyle reloadSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6reload") {
-            Volume = 0.8f,
-            Pitch = 0.1f,
-            MaxInstances = 3
-        };
-
-        private WunderWeapon Gun => Item.GetGlobalItem<WunderWeapon>();
-        public override void SetDefaults(){
+    public class RaygunMK2 : WunderWeapon
+    {
+        public override void SetDefaults()
+        {
             Item.width = 60;
             Item.height = 40;
             Item.scale = 2f;
@@ -36,30 +26,37 @@ namespace BlackOps3.Content.Items.Weapons.BO3.WunderWeapons
 			Item.shoot = ProjectileID.Bullet;
 			Item.shootSpeed = 20f; // The speed of the projectile (measured in pixels per frame.) 
 			Item.useAmmo = AmmoID.None; // The "ammo Id" of the ammo item that this weapon uses. Ammo IDs are magic numbers that usually correspond to the item id of one item that most commonly represent the ammo type.
-            if (Item.TryGetGlobalItem(out WunderWeapon gun)) {
-                gun.IsReloadable=true;
-                gun.ammo=15;
-                gun.magCapacity = 15;
-                gun.ammoReserve=150;
-                gun.reloadTime = (int)(60 * 2.98);
-                gun.reloadSound = reloadSound;
-                gun.shootSound= shootSound;
-                gun.whenToPlaySound= 3;
-            }
+
+            
+            ammo = 15;
+            magCapacity = 15;
+            ammoReserve = 150;
+            reloadTime = (int)(60 * 2.98);
+            shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot")
+            {
+                Volume = 0.8f,
+                Pitch = 0.1f,
+                MaxInstances = 3
+            };
+            reloadSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6reload")
+            {
+                Volume = 0.8f,
+                Pitch = 0.1f,
+                MaxInstances = 3
+            };
+            whenToPlaySound = 3;
         }
         public override void SetStaticDefaults() {
             Terraria.Localization.Language.GetOrRegister("Mods.BlackOps3.Items.WunderWaffe.DisplayName", () => "Wunderwaffe DG-2");
         }
-		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-            if (Gun.ammo > 0) {
-                Projectile.NewProjectile(source, position, velocity,ModContent.ProjectileType<RaygunProjectile>() , damage, knockback, player.whoAmI);
-                Gun.playSound();
-                Gun.removeBullets(1);
-                /*Vector2 knock = new Vector2.Zero;
-                player.velocity+=;*/
+            if (ammo > 0)
+            {
+                Projectile.NewProjectile(source, position, velocity, ModContent.ProjectileType<RaygunProjectile>(), damage, knockback, player.whoAmI);
+                playSound();
+                removeBullets(1);
             }
-            //TODO Add knock to player
             return false;
 		}
        

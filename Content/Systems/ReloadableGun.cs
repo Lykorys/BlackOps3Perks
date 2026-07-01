@@ -11,9 +11,11 @@ using BlackOps3.Content.Players;
 using Terraria.DataStructures;
 namespace BlackOps3.Content.Systems
 {
-    public class ReloadableGun : Reloadable
+    public abstract class ReloadableGun : Reloadable
     {
         public List<int> loadedBullets = new List<int>();
+        public override void SetDefaults() => shootSoundNumber = whenToPlaySound; 
+
         public void removeBullets()
         {
             loadedBullets.RemoveAt(0);
@@ -21,7 +23,7 @@ namespace BlackOps3.Content.Systems
         }
         public override void reload(Player player)
         {
-            if (!IsReloadable) return;
+
             playerPerks.isReloading = true;
             int ammoToRemove = magCapacity-ammo;
             shootSoundNumber=whenToPlaySound;
@@ -44,10 +46,17 @@ namespace BlackOps3.Content.Systems
                 }
             }
         }
-        public override bool canReload(Player player) => !(playerPerks?.isReloading ?? false) && GetTotalReserve(player)>0 && ammo < magCapacity;
+        public override bool canReload(Player player)
+        {
+            Main.NewText(playerPerks.isReloading,Color.Aquamarine);
+            Main.NewText(GetTotalReserve(player)>0,Color.OrangeRed);
+            Main.NewText(ammo);
+            Main.NewText(magCapacity,Color.Gold);
+            Main.NewText(!playerPerks.isReloading && GetTotalReserve(player)>0 && ammo < magCapacity,Color.SeaGreen);
+            return !playerPerks.isReloading && GetTotalReserve(player)>0 && ammo < magCapacity;
+        } 
         
-        public override void PostDrawInInventory(Item item,SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
-            if (!IsReloadable) return;
+        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
             Player player = Main.LocalPlayer;
             int totalReserves = 0;
             foreach (Item invItem in player.inventory) {
@@ -87,7 +96,7 @@ namespace BlackOps3.Content.Systems
                 new Vector2(textScale)
             );
         }
-        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot( Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
            if (ammo > 0 && loadedBullets.Count > 0) {
                 Projectile.NewProjectile(source, position, velocity, loadedBullets[0], damage, knockback, player.whoAmI);
@@ -97,14 +106,14 @@ namespace BlackOps3.Content.Systems
             else SoundEngine.PlaySound(SoundID.MenuTick, player.position);
             return false;
         }
-        public override void SaveData(Item item, TagCompound tag) {
-            if (IsReloadable) {
-                tag["ammo"] = ammo;
-                tag["bullets"] = loadedBullets;
-            }
+        public override void SaveData(TagCompound tag) {
+
+            tag["ammo"] = ammo;
+            tag["bullets"] = loadedBullets;
+            
         }
 
-        public override void LoadData(Item item, TagCompound tag) {
+        public override void LoadData(TagCompound tag) {
             if (tag.ContainsKey("ammo")) {
                 ammo = tag.GetInt("ammo");
             }

@@ -13,7 +13,7 @@ using Humanizer;
 using Terraria.DataStructures;
 namespace BlackOps3.Content.Systems
 {
-    public abstract class Reloadable : GlobalItem
+    public abstract class Reloadable : ModItem
     {
         public PlayerPerks playerPerks;
         public int chargeTimer = 0;
@@ -21,8 +21,6 @@ namespace BlackOps3.Content.Systems
         public int ammo = 0;
         public int magCapacity;
         public int maxDefaultAmmo;
-        public override bool InstancePerEntity => true;
-        public bool IsReloadable = false;
         public SoundStyle? reloadSound;
         public SoundStyle shootSound;
         public bool hasPlayedReloadSound = false; 
@@ -30,21 +28,12 @@ namespace BlackOps3.Content.Systems
         public int whenToPlaySound=1;
         public int shootSoundNumber;
         public abstract bool canReload(Player player);
-        public override void SetDefaults(Item entity)
-        {
-            shootSoundNumber=whenToPlaySound;
-            maxDefaultAmmo=magCapacity;
-        }
-
-        public override void HoldItem(Item item, Player player)
+        public override void AutoDefaults() => maxDefaultAmmo = magCapacity; 
+        public override void HoldItem(Player player)
         {
             playerPerks = player.GetModPlayer<PlayerPerks>();
-            //if(magCapacity == maxDefaultAmmo) magCapacity = (int)(magCapacity * playerPerks.magSizeMult);
-            //if(playerPerks.magSizeMult==1f) magCapacity = maxDefaultAmmo;
-            //magCapacity = playerPerks.magSizeMult==1f ? maxDefaultAmmo : (int)(magCapacity * playerPerks.magSizeMult);
+            if(maxDefaultAmmo==0) maxDefaultAmmo=magCapacity;
             magCapacity = (int)(maxDefaultAmmo * playerPerks.magSizeMult);
-            if (!IsReloadable) return;
-
             if (KeybindSystem.Reload.JustPressed && !playerPerks.isReloading) {
                 if (canReload(player)) {
                     reload(player);
@@ -72,7 +61,7 @@ namespace BlackOps3.Content.Systems
                 hasPlayedReloadSound = false;
             }
         }
-        public override bool CanUseItem(Item item, Player player)
+        public override bool CanUseItem(Player player)
         {
             playerPerks = player.GetModPlayer<PlayerPerks>();
             if (playerPerks.isReloading) return false;
@@ -102,8 +91,7 @@ namespace BlackOps3.Content.Systems
             }
             return totalReserves;
         }
-        public override void PostDrawInInventory(Item item,SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
-            if (!IsReloadable) return;
+        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
             Player player = Main.LocalPlayer;
             int totalReserves = GetTotalReserve(player);
             string magText = $"{ammo}";

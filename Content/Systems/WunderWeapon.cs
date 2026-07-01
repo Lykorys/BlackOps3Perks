@@ -12,15 +12,19 @@ using BlackOps3.Content.Players;
 using Humanizer;
 namespace BlackOps3.Content.Systems
 {
-    public class WunderWeapon : Reloadable //TODO fix reload 
+    public abstract class WunderWeapon : Reloadable
     {
-        public int ammoReserve = 0;
-        public override void SetDefaults(Item entity)
-        {
-            shootSoundNumber=whenToPlaySound;
-            maxDefaultAmmo=magCapacity;
-        }
-        public override bool canReload(Player player) => !(playerPerks?.isReloading ?? false) && ammoReserve>0 && ammo < magCapacity;
+        public int ammoReserve;
+        
+        public override void SetDefaults() => shootSoundNumber = whenToPlaySound; 
+        public override bool canReload(Player player) {
+            Main.NewText(playerPerks.isReloading,Color.Aquamarine);
+            Main.NewText(ammoReserve,Color.OrangeRed);
+            Main.NewText(ammo);
+            Main.NewText(magCapacity,Color.Gold);
+            Main.NewText(!playerPerks.isReloading && ammoReserve>0 && ammo < magCapacity,Color.SeaGreen);
+            return !playerPerks.isReloading && ammoReserve>0 && ammo < magCapacity;
+        } 
         public void removeBullets(int numberToRemove)
         {
             for(int _ = 0; _ < numberToRemove; _++)
@@ -30,7 +34,6 @@ namespace BlackOps3.Content.Systems
         }
         public override void reload(Player player)
         {
-            if (!IsReloadable) return;
             playerPerks = player.GetModPlayer<PlayerPerks>();
             playerPerks.isReloading = true;
             int ammoToRemove = magCapacity - ammo;
@@ -42,8 +45,7 @@ namespace BlackOps3.Content.Systems
                 ammo++;
             }
         }
-        public override void PostDrawInInventory(Item item,SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
-            if (!IsReloadable) return;
+        public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale) {
             string magText = $"{ammo}";
             string reserveText = $"{ammoReserve}";
             float textScale = scale * 1.5f; 
@@ -76,14 +78,12 @@ namespace BlackOps3.Content.Systems
                 new Vector2(textScale)
             );
         }
-        public override void SaveData(Item item, TagCompound tag) {
-            if (IsReloadable) {
-                tag["ammo"] = ammo;
-                tag["ammoReserve"] = ammoReserve;
-            }
+        public override void SaveData( TagCompound tag) { 
+            tag["ammo"] = ammo;
+            tag["ammoReserve"] = ammoReserve;
         }
 
-        public override void LoadData(Item item, TagCompound tag) {
+        public override void LoadData( TagCompound tag) {
             if (tag.ContainsKey("ammo")) {
                 ammo = tag.GetInt("ammo");
             }

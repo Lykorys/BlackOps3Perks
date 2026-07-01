@@ -14,16 +14,20 @@ namespace BlackOps3.Content.Items.Tiles.Perks
     public class MuleKickTile : PerkMachine
     {
         public override Perk perk => new MuleKick();
-        public override string Texture => "Terraria/Images/Tiles_26"; 
         public override void SetStaticDefaults() {
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
             Main.tileLavaDeath[Type] = false;
-            TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
-            TileObjectData.newTile.CoordinateHeights = new[] { 16, 16 };
+
+            TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
+            TileObjectData.newTile.Width = 3;
+            TileObjectData.newTile.Height = 5;
+            TileObjectData.newTile.CoordinateWidth = 16;
+            TileObjectData.newTile.CoordinatePadding = 0;
+            TileObjectData.newTile.CoordinateHeights = new[] { 16, 16, 16, 16,16};
             TileObjectData.addTile(Type);
+
             AddMapEntry(new Color(150, 50, 255)); 
-            AdjTiles = new int[] { TileID.Hellforge };
         }
     }
     public class MuleKickEntity : ModTileEntity
@@ -35,7 +39,7 @@ namespace BlackOps3.Content.Items.Tiles.Perks
 
         public override int Hook_AfterPlacement(int i, int j, int type, int style, int direction, int alternate) {
             if (Main.netMode == NetmodeID.MultiplayerClient) {
-                NetMessage.SendTileSquare(Main.myPlayer, i, j, 3, 2);
+                NetMessage.SendTileSquare(Main.myPlayer, i, j, 5);
                 NetMessage.SendData(MessageID.TileEntityPlacement, -1, -1, null, i, j, Type);
                 return -1;
             }
@@ -46,7 +50,7 @@ namespace BlackOps3.Content.Items.Tiles.Perks
     {
         public override string Texture => "BlackOps3/Content/Players/PerksLogo/MuleKickLogo";
         public override void SetDefaults() {
-            Item.DefaultToPlaceableTile(ModContent.TileType<MuleKickTile>(), 1);
+            Item.DefaultToPlaceableTile(ModContent.TileType<MuleKickTile>());
             Item.width = 32;
             Item.height = 32;
         }

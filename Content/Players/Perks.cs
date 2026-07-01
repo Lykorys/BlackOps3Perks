@@ -292,7 +292,7 @@ namespace BlackOps3.Content.Players
         */
         public override int maxTier { get; } = 5;
         public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
-        public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/ElectricCherryLogo").Value;
+        public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/WidowsWineLogo").Value;
         
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {

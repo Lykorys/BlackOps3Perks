@@ -9,21 +9,9 @@ using BlackOps3.Content.Systems;
 namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
 {
     
-    public class KN44 : ModItem{
+    public class KN44 : ReloadableGun{
         public override string Texture => "Terraria/Images/Item_"+ItemID.CandyCornRifle;
-        SoundStyle shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot") {
-            Volume = 0.8f,
-            Pitch = 0.1f,
-            MaxInstances = 3
-        };
-        SoundStyle reloadSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6reload") {
-            Volume = 0.8f,
-            Pitch = 0.1f,
-            MaxInstances = 3
-        };
-
-        private ReloadableGun Gun => Item.GetGlobalItem<ReloadableGun>();
-        public override void SetDefaults(){
+                public override void SetDefaults(){
 			Item.rare = ItemRarityID.Green; // The color that the item's name will be in-game.
 			Item.useTime = 10; // The item's use time in ticks (60 ticks == 1 second.)
 			Item.useAnimation = 10; // The length of the item's use animation in ticks (60 ticks == 1 second.)
@@ -35,14 +23,19 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
 			Item.shoot = ProjectileID.Bullet;
 			Item.shootSpeed = 20f; // The speed of the projectile (measured in pixels per frame.) 
 			Item.useAmmo = AmmoID.None; // The "ammo Id" of the ammo item that this weapon uses. Ammo IDs are magic numbers that usually correspond to the item id of one item that most commonly represent the ammo type.
-            if (Item.TryGetGlobalItem(out ReloadableGun gun)) {
-                gun.IsReloadable=true;
-                gun.magCapacity = 30;
-                gun.reloadTime = (int)(60 * 2);
-                gun.reloadSound = reloadSound;
-                gun.shootSound= shootSound;
-                gun.whenToPlaySound= Item.useAnimation/Item.useTime;
-            }
+            magCapacity = 30;
+            reloadTime = (int)(60 * 2);
+            whenToPlaySound= Item.useAnimation/Item.useTime;
+            shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot") {
+                Volume = 0.8f,
+                Pitch = 0.1f,
+                MaxInstances = 3
+            };
+            reloadSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6reload") {
+                Volume = 0.8f,
+                Pitch = 0.1f,
+                MaxInstances = 3
+            };
         }
         public override void SetStaticDefaults() {
             Terraria.Localization.Language.GetOrRegister("Mods.BlackOps3.Items.KN-44.DisplayName", () => "KN-44");
@@ -50,10 +43,10 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
 
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 
 		{
-            if (Gun.loadedBullets.Count > 0) {
-                Projectile.NewProjectile(source, position, velocity, Gun.loadedBullets[0], damage, knockback, player.whoAmI);
-                Gun.playSound();
-                Gun.removeBullets();
+            if (loadedBullets.Count > 0) {
+                Projectile.NewProjectile(source, position, velocity, loadedBullets[0], damage, knockback, player.whoAmI);
+                playSound();
+                removeBullets();
             }
             return false;
 		}
