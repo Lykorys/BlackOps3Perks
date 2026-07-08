@@ -288,19 +288,32 @@ namespace BlackOps3.Content.Players
         Tier 2 : +1 max spawn et +x% de taux de spawn
         Tier 3 : donne l'abilité de s'attacher au mur et ameliore la vitesse de rétractation du grapin 
         Tier 4 : +2 max spawn 
-        Tier 5 : ameliore l'effet de poison et de ralentissement. Si vous utilisez une armure summon gagnez +0.2hp/s pour chaque araignée vivante 
+        Tier 5 : ameliore l'effet de poison et de ralentissement. Si vous utilisez une armure summon gagnez +0.5hp/s pour chaque araignée vivante 
         */
         public override int maxTier { get; } = 5;
         public override int[] prices { get; } = [500, 1500, 3000, 4500, 6000];
         public override Texture2D perkLogo => ModContent.Request<Texture2D>("BlackOps3/Content/Players/PerksLogo/WidowsWineLogo").Value;
-        
+        public static int defaultMaxSpawn = 4;
+        public int maxSpawns;
+        public int currSpawn;
+        public int spawnChance = 30;
+        public int defaultSpawnChance = 30;
         public override void ApplyEffect(PlayerPerks perkPlayer)
         {
-            if(tier>=1);
-            if(tier>=2);
-            if(tier>=3);
-            if(tier>=4);
-            if(tier>=5);
+            if (tier >= 2)
+            {
+                maxSpawns++;
+                spawnChance+=20;
+            } 
+            if(tier>=3)perkPlayer.canClimbWall=true;
+            if(tier>=4) maxSpawns+=2;
+            if (tier >= 5)
+            {
+                
+                if(perkPlayer.Player.maxMinions>1&& perkPlayer.Player.GetTotalDamage(DamageClass.Summon).Additive>1f) perkPlayer.Player.lifeRegen+=1*currSpawn;
+            }
+
         }
+        
     }
 }

@@ -25,15 +25,13 @@ namespace BlackOps3.Content.Players
         */
         public float reloadSpeed = 1f;
         public float magSizeMult= 1f;
-        
         public bool doubleAllProjectiles;
         public bool NoNPCPylons;
         public float ammoSaveChance;
         public float dashLengthMod;
         public float dashCooldownMod;
         public bool keepCoinsOnDeath;
-
-
+        public bool canClimbWall;
 
         public bool HasPerk(string perk) => ActivePerks.ContainsKey(perk);
         public void AddPerk(Perk perk) 
@@ -70,7 +68,6 @@ namespace BlackOps3.Content.Players
         {
             magSizeMult = 1f;
             ammoSaveChance = 0f;
-            magSizeMult = 1f;
             doubleAllProjectiles = false;
             NoNPCPylons = false;
             keepCoinsOnDeath = false;

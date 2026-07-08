@@ -197,6 +197,36 @@ Items: {
 		Tooltip: ""
 		DisplayName: Widows Wine Item
 	}
+
+	HVK: {
+		DisplayName: HVK-30
+		Tooltip: ""
+	}
+
+	ICR: {
+		DisplayName: ICR-1
+		Tooltip: ""
+	}
+
+	ManOWar: {
+		DisplayName: Man-O-War
+		Tooltip: ""
+	}
+
+	XR: {
+		DisplayName: XR-2
+		Tooltip: ""
+	}
+
+	Brecci: {
+		DisplayName: Brecci
+		Tooltip: ""
+	}
+
+	KRM: {
+		DisplayName: K R M
+		Tooltip: ""
+	}
 }
 
 NPCs: {

@@ -6,7 +6,6 @@ Effect 4: Your knife will deal more damage and has a chance to slow zombies.
 
 On hit idem CD 10-30 sec
 */
-//Increase mag size
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;

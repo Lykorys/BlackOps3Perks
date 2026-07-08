@@ -13,11 +13,11 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
         public override string Texture => "Terraria/Images/Item_"+ItemID.CandyCornRifle;
         public override void SetDefaults(){
             Item.rare = ItemRarityID.Green;
-            Item.useTime = 10;
-            Item.useAnimation = 10;
+            Item.useTime = 6;
+            Item.useAnimation = 6;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.DamageType = DamageClass.Ranged;
-            Item.damage = 20;
+            Item.damage = 35;
             Item.knockBack = 500f;
             Item.noMelee = true;
             Item.shoot = ProjectileID.Bullet;
