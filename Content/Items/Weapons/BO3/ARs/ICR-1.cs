@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using BlackOps3.Content.Systems;
 
-namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
+namespace BlackOps3.Content.Items.Weapons.BO3.ARs
 {
     public class ICR : ReloadableGun{
         public override string Texture => "Terraria/Images/Item_"+ItemID.CandyCornRifle;
@@ -43,7 +43,7 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Pistols
 
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 
 		{
-            Main.NewText(loadedBullets.ToArray());
+            
             if (loadedBullets.Count > 0) {
                 Projectile.NewProjectile(source, position, velocity, loadedBullets[0], damage, knockback, player.whoAmI);
                 playSound();

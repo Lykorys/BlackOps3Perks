@@ -227,6 +227,26 @@ Items: {
 		DisplayName: K R M
 		Tooltip: ""
 	}
+
+	Drakon: {
+		DisplayName: Drakon
+		Tooltip: ""
+	}
+
+	M8A1: {
+		Tooltip: ""
+		DisplayName: M8A1
+	}
+
+	SVG: {
+		DisplayName: SVG-100
+		Tooltip: ""
+	}
+
+	Locus: {
+		DisplayName: Locus
+		Tooltip: ""
+	}
 }
 
 NPCs: {

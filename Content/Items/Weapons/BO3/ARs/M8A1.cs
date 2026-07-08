@@ -9,12 +9,13 @@ using BlackOps3.Content.Systems;
 namespace BlackOps3.Content.Items.Weapons.BO3.ARs
 {
     
-    public class KN44 : ReloadableGun{
+    public class M8A1 : ReloadableGun{
         public override string Texture => "Terraria/Images/Item_"+ItemID.CandyCornRifle;
         public override void SetDefaults(){
             Item.rare = ItemRarityID.Green;
-            Item.useTime = 6;
-            Item.useAnimation = 6;
+            Item.useTime = 1;
+            Item.useAnimation = 4;
+            Item.reuseDelay=2;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.DamageType = DamageClass.Ranged;
             Item.damage = 35;
@@ -23,7 +24,7 @@ namespace BlackOps3.Content.Items.Weapons.BO3.ARs
             Item.shoot = ProjectileID.Bullet;
             Item.shootSpeed = 20f;
             Item.useAmmo = AmmoID.None;
-            magCapacity = 30;
+            magCapacity = 32;
             reloadTime = (int)(60 * 2);
             whenToPlaySound= Item.useAnimation/Item.useTime;
             shootSound = new SoundStyle("BlackOps3/Content/Sound/Weapons/MR6shoot") {
@@ -39,7 +40,7 @@ namespace BlackOps3.Content.Items.Weapons.BO3.ARs
             LoadBullets();
         }
         public override void SetStaticDefaults() {
-            Terraria.Localization.Language.GetOrRegister("Mods.BlackOps3.Items.KN-44.DisplayName", () => "KN-44");
+            Terraria.Localization.Language.GetOrRegister("Mods.BlackOps3.Items.M8A1.DisplayName", () => "M8A1");
         }
 
 		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) 
