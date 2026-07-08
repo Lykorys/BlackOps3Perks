@@ -247,6 +247,16 @@ Items: {
 		DisplayName: Locus
 		Tooltip: ""
 	}
+
+	Haymaker: {
+		Tooltip: ""
+		DisplayName: Haymaker
+	}
+
+	Argus: {
+		Tooltip: ""
+		DisplayName: Argus
+	}
 }
 
 NPCs: {

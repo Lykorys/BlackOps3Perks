@@ -50,8 +50,12 @@ namespace BlackOps3.Content.Items.Weapons.BO3.Shotguns
 			for (int i = 0; i < NumProjectiles; i++) {
 				Vector2 newVelocity = velocity.RotatedByRandom(MathHelper.ToRadians(15));
 				newVelocity *= 1f - Main.rand.NextFloat(0.3f);
-				Projectile.NewProjectileDirect(source, position, newVelocity, type, damage, knockback, player.whoAmI);
-			}
+				if (loadedBullets.Count > 0) {
+					Projectile.NewProjectile(source, position, newVelocity, loadedBullets[0], damage, knockback, player.whoAmI);
+				}
+            }
+			removeBullets();
+			playSound();
 			return false;
 		}
 		public override Vector2? HoldoutOffset() {
